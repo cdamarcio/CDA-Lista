@@ -3,120 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia Comercial - Conceição do Araguaia</title>
+    <title>CDA-Lista | Cadastro de Empresas</title>
     <style>
         :root {
-            --primary: #2c3e50;
-            --accent: #27ae60;
-            --light: #f4f7f6;
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
         }
 
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light); margin: 0; padding: 20px; }
-        h1 { text-align: center; color: var(--primary); }
-
-        /* Estilo da Lista */
-        .search-container { max-width: 600px; margin: 20px auto; }
-        #searchBar { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd; }
-
-        .lista-empresas { max-width: 800px; margin: 0 auto; display: grid; gap: 10px; }
-        .empresa-item { 
-            background: white; padding: 15px; border-radius: 8px; 
-            cursor: pointer; display: flex; align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: 0.3s;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
         }
-        .empresa-item:hover { transform: scale(1.02); border-left: 5px solid var(--accent); }
-        .empresa-item img { width: 50px; height: 50px; border-radius: 50%; margin-right: 15px; object-fit: cover; }
 
-        /* Estilo do Modal (Janela) */
-        .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); }
-        .modal-content { 
-            background: white; margin: 10% auto; padding: 20px; width: 90%; max-width: 500px; 
-            border-radius: 12px; position: relative; text-align: center;
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
         }
-        .close { position: absolute; right: 20px; top: 10px; font-size: 28px; cursor: pointer; }
-        .modal-img { width: 100%; max-height: 250px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
-        .status-tag { display: inline-block; padding: 5px 10px; border-radius: 20px; font-size: 12px; background: #e0f2f1; color: var(--accent); }
+
+        header {
+            text-align: center;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .grid-empresas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .nome-empresa {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .info {
+            margin: 8px 0;
+            font-size: 0.95rem;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #7f8c8d;
+        }
+
+        .contato-link {
+            display: inline-block;
+            margin-top: 10px;
+            color: #27ae60;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #95a5a6;
+        }
     </style>
 </head>
 <body>
 
-    <h1>🏢 Guia Comercial CDA</h1>
+<div class="container">
+    <header>
+        <h1>CDA - Lista de Empresas</h1>
+        <p>Atualizado em Março de 2026</p>
+    </header>
 
-    <div class="search-container">
-        <input type="text" id="searchBar" placeholder="Buscar empresa ou atividade..." onkeyup="filtrar()">
-    </div>
-
-    <div id="lista" class="lista-empresas">
+    <div class="grid-empresas">
+        <div class="card">
+            <div class="nome-empresa">RAZGO</div>
+            <div class="info"><span class="label">Ramo:</span> Tecnologia</div>
+            <div class="info"><span class="label">Endereço:</span> Centro</div>
+            <div class="info"><span class="label">Contato:</span> (62) 99646-6033</div>
+            <a href="https://wa.me/5562996466033" class="contato-link" target="_blank">WhatsApp ↗</a>
         </div>
 
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="fecharModal()">&times;</span>
-            <img id="modalFoto" class="modal-img" src="" alt="Logo">
-            <h2 id="modalNome"></h2>
-            <p id="modalRamo" style="color: #666; font-style: italic;"></p>
-            <hr>
-            <p>📍 <strong>Endereço:</strong> <span id="modalEndereco"></span></p>
-            <p>📞 <strong>Contato:</strong> <span id="modalTelefone"></span></p>
-            <span id="modalStatus" class="status-tag"></span>
+        <div class="card">
+            <div class="nome-empresa">MAZZ</div>
+            <div class="info"><span class="label">Ramo:</span> Educação</div>
+            <div class="info"><span class="label">Endereço:</span> Centro</div>
+            <div class="info"><span class="label">Contato:</span> (62) 99646-6033</div>
+            <a href="https://wa.me/5562996466033" class="contato-link" target="_blank">WhatsApp ↗</a>
+        </div>
+
+        <div class="card">
+            <div class="nome-empresa">MR TREINAMENTOS</div>
+            <div class="info"><span class="label">Ramo:</span> Educação</div>
+            <div class="info"><span class="label">Endereço:</span> Centro</div>
+            <div class="info"><span class="label">Contato:</span> (62) 99646-6033</div>
+            <a href="https://wa.me/5562996466033" class="contato-link" target="_blank">WhatsApp ↗</a>
+        </div>
+
+        <div class="card">
+            <div class="nome-empresa">KM PROJETOS</div>
+            <div class="info"><span class="label">Ramo:</span> Engenharia</div>
+            <div class="info"><span class="label">Endereço:</span> Vila Cruzeiro</div>
+            <div class="info"><span class="label">Contato:</span> (94) 99250-0073</div>
+            <a href="https://wa.me/5594992500073" class="contato-link" target="_blank">WhatsApp ↗</a>
         </div>
     </div>
 
-    <script>
-        // Dados das Empresas (Onde você vai cadastrar as novas)
-        const empresas = [
-            { nome: "Se7e Sistemas", ramo: "Tecnologia", endereco: "Rua Bolonha, Centro", tel: "(94) 99123-4567", status: "Ativa", foto: "https://via.placeholder.com/400x250?text=Se7e+Sistemas" },
-            { nome: "Araguaia Auto Center", ramo: "Mecânica", endereco: "Av. Fernando Guilhon", tel: "(94) 3421-0000", status: "Ativa", foto: "https://via.placeholder.com/400x250?text=Auto+Center" },
-            { nome: "Carneiro Contabilidade", ramo: "Contabilidade", endereco: "Centro", tel: "(94) 99199-8744", status: "Ativa", foto: "https://via.placeholder.com/400x250?text=Contabilidade" },
-            { nome: "Astecon", ramo: "Contabilidade", endereco: "Centro", tel: "(94) 3421-2037", status: "Ativa", foto: "https://via.placeholder.com/400x250?text=Astecon" }
-        ];
+    <footer>
+        &copy; 2026 CDA-Lista - Desenvolvido por Márcio Rodrigues
+    </footer>
+</div>
 
-        const listaDiv = document.getElementById('lista');
-
-        // Função para renderizar e ordenar de A a Z
-        function renderizar(dados) {
-            listaDiv.innerHTML = "";
-            const ordenados = dados.sort((a, b) => a.nome.localeCompare(b.nome));
-            
-            ordenados.forEach((empresa, index) => {
-                listaDiv.innerHTML += `
-                    <div class="empresa-item" onclick="abrirModal(${JSON.stringify(empresa).replace(/"/g, '&quot;')})">
-                        <img src="${empresa.foto}" alt="Logo">
-                        <div>
-                            <strong>${empresa.nome}</strong><br>
-                            <small>${empresa.ramo}</small>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        // Busca em tempo real
-        function filtrar() {
-            const termo = document.getElementById('searchBar').value.toLowerCase();
-            const filtrados = empresas.filter(e => 
-                e.nome.toLowerCase().includes(termo) || e.ramo.toLowerCase().includes(termo)
-            );
-            renderizar(filtrados);
-        }
-
-        // Lógica da Janela (Modal)
-        function abrirModal(empresa) {
-            document.getElementById('modalNome').innerText = empresa.nome;
-            document.getElementById('modalRamo').innerText = empresa.ramo;
-            document.getElementById('modalEndereco').innerText = empresa.endereco;
-            document.getElementById('modalTelefone').innerText = empresa.tel;
-            document.getElementById('modalStatus').innerText = empresa.status;
-            document.getElementById('modalFoto').src = empresa.foto;
-            document.getElementById('myModal').style.display = "block";
-        }
-
-        function fecharModal() {
-            document.getElementById('myModal').style.display = "none";
-        }
-
-        // Iniciar lista
-        renderizar(empresas);
-    </script>
 </body>
 </html>

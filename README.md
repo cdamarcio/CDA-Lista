@@ -2,7 +2,9 @@
 
 # Guia Comercial Digital - CDA
 
-Um catálogo interativo e responsivo das empresas e prestadores de serviço da cidade de **Conceição do Araguaia - PA**. O projeto foi idealizado para facilitar o acesso rápido a informações de contato e localização do comércio local.
+Um catálogo interativo e responsivo das empresas e prestadores de serviço da cidade de **Conceição do Araguaia - PA**. 
+
+O projeto foi idealizado para facilitar o acesso rápido a informações de contato e localização do comércio local.
 
 ## Funcionalidades
 
@@ -21,7 +23,7 @@ Cada registro de empresa no sistema contém:
 - **Telefone/WhatsApp**: Canal de comunicação direto.
 - **Status**: Indicação se o estabelecimento está ativo.
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
 * **HTML5 & CSS3**: Estruturação e estilização moderna.
 * **JavaScript (Vanilla)**: Lógica de ordenação, filtros e manipulação do DOM (sem dependências externas).

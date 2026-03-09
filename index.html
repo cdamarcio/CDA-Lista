@@ -13,19 +13,11 @@
             --whatsapp-color: #25d366;
         }
 
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: var(--bg);
-            margin: 0;
-            padding: 20px;
-        }
-
+        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: var(--bg); margin: 0; padding: 20px; }
         .container { max-width: 1200px; margin: auto; }
-
         header { text-align: center; margin-bottom: 40px; }
         h1 { color: var(--primary); }
 
-        /* Estilo dos Cards */
         .grid-empresas {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -65,47 +57,16 @@
         .ramo { color: var(--accent); font-size: 0.9em; font-weight: bold; margin-bottom: 10px; }
         .info { font-size: 0.85em; color: #666; margin: 2px 0; }
 
-        /* Botão Flutuante de WhatsApp */
         .btn-whatsapp {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 40px;
-            right: 40px;
-            background-color: var(--whatsapp-color);
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 3px #999;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: 0.3s;
+            position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px;
+            background-color: var(--whatsapp-color); color: #FFF; border-radius: 50px;
+            text-align: center; font-size: 30px; box-shadow: 2px 2px 3px #999;
+            z-index: 1000; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: 0.3s;
         }
 
-        .btn-whatsapp:hover {
-            transform: scale(1.1);
-            background-color: #128c7e;
-        }
-
-        /* Rodapé */
-        footer {
-            margin-top: 50px;
-            text-align: center;
-            padding: 20px;
-            border-top: 1px solid #ddd;
-            color: #666;
-            font-size: 0.9em;
-        }
-
-        footer a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: bold;
-        }
+        footer { margin-top: 50px; text-align: center; padding: 20px; border-top: 1px solid #ddd; color: #666; font-size: 0.9em; }
+        footer a { color: var(--accent); text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -113,11 +74,9 @@
 <div class="container">
     <header>
         <h1>Guia de Empresas - Conceição do Araguaia</h1>
-        <p>Desenvolvido para fortalecer o comércio local</p>
     </header>
 
-    <div class="grid-empresas" id="lista-empresas">
-        </div>
+    <div class="grid-empresas" id="lista-empresas"></div>
 
     <footer>
         <p>© 2026 CDA-Lista - Desenvolvido por: <a href="https://razgo.com.br/" target="_blank">RAZGO</a></p>
@@ -125,44 +84,56 @@
 </div>
 
 <a href="https://wa.me/5594992500073" class="btn-whatsapp" target="_blank">
-    <svg width="35" height="35" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"/>
-    </svg>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35" alt="Zap">
 </a>
 
 <script>
-    // As mesmas 100 empresas em ordem alfabética
-    const empresas = [
-        {n: "Academia Força Viva", r: "Fitness", e: "Av. Frei Gil de Vila Nova", t: "(94) 991**-****"},
-        {n: "AgroForte Araguaia", r: "Agronegócio", e: "Av. J.K, Centro", t: "(94) 991**-****"},
-        {n: "Construa CDA", r: "Engenharia", e: "Av. Magalhães Barata", t: "(94) 991**-****"},
-        {n: "KM Projetos", r: "Engenharia", e: "Vila Cruzeiro", t: "(94) 991**-****"},
+    const dados = [
+        {n: "RAZGO", r: "Tecnologia", e: "Centro", t: "(94) 991**-****"},
         {n: "MAZZ", r: "Educação", e: "Centro", t: "(94) 991**-****"},
         {n: "MR TREINAMENTOS", r: "Educação", e: "Centro", t: "(94) 991**-****"},
-        {n: "RAZGO", r: "Tecnologia", e: "Centro", t: "(94) 991**-****"}
-        // ... adicione as demais empresas aqui seguindo a ordem alfabética
+        {n: "KM PROJETOS", r: "Engenharia", e: "Vila Cruzeiro", t: "(94) 991**-****"},
+        {n: "Academia Força Viva", r: "Fitness", e: "Av. Frei Gil", t: "(94) 991**-****"},
+        {n: "AgroForte Araguaia", r: "Agronegócio", e: "Av. J.K", t: "(94) 991**-****"},
+        {n: "Auto Escola Piloto", r: "Educação", e: "Centro", t: "(94) 991**-****"},
+        {n: "Boutique Estilo", r: "Vestuário", e: "Av. 7 de Setembro", t: "(94) 991**-****"},
+        {n: "Construa CDA", r: "Engenharia", e: "Av. Magalhães Barata", t: "(94) 991**-****"},
+        {n: "Drogaria Araguaia", r: "Saúde", e: "Praça da Matriz", t: "(94) 991**-****"},
+        {n: "Hotel Rio Araguaia", r: "Hotelaria", e: "Beira Rio", t: "(94) 991**-****"},
+        {n: "Imobiliária Norte", r: "Imóveis", e: "Av. J.K", t: "(94) 991**-****"},
+        {n: "Informática CDA", r: "Tecnologia", e: "Rua da República", t: "(94) 991**-****"},
+        {n: "Lanchonete Burguer", r: "Gastronomia", e: "Praça da Matriz", t: "(94) 991**-****"},
+        {n: "Marmoraria Pedrasul", r: "Construção", e: "Setor Industrial", t: "(94) 991**-****"},
+        {n: "Oficina do Zé", r: "Mecânica", e: "Setor Tancredo Neves", t: "(94) 991**-****"},
+        {n: "Panificadora Central", r: "Alimentos", e: "Centro", t: "(94) 991**-****"},
+        {n: "Peixaria do Araguaia", r: "Alimentos", e: "Mercado Municipal", t: "(94) 991**-****"},
+        {n: "Pesqueiro Real", r: "Lazer", e: "Beira Rio", t: "(94) 991**-****"},
+        {n: "Supermercado Econômico", r: "Varejo", e: "Bairro São Luiz", t: "(94) 991**-****"}
+        // ... (as outras empresas seguem a mesma lógica)
     ];
 
-    const grid = document.getElementById('lista-empresas');
-    
-    // Gerador de Logos Gratuitas do DiceBear (Estilo 'identicon' ou 'initials')
-    empresas.forEach(emp => {
-        // Usamos o nome da empresa para gerar uma logo única e gratuita da internet
-        const logoUrl = `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(emp.n)}&backgroundColor=007bff,3498db,2c3e50&fontSize=40`;
+    // Adiciona as 100 fictícias geradas anteriormente (Simulado)
+    for(let i=1; i<=100; i++) {
+        dados.push({n: `Empresa Exemplo ${i}`, r: "Comércio", e: "Conceição do Araguaia", t: "(94) 991**-****"});
+    }
 
+    // Ordenar Alfabeticamente
+    dados.sort((a, b) => a.n.localeCompare(b.n));
+
+    const grid = document.getElementById('lista-empresas');
+    dados.forEach(emp => {
+        // Logo automática baseada nas iniciais (Serviço gratuito DiceBear)
+        const logoUrl = `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(emp.n)}&backgroundColor=007bff,3498db,2c3e50&fontSize=40`;
+        
         grid.innerHTML += `
             <div class="card">
-                <div class="logo-box">
-                    <img src="${logoUrl}" alt="Logo">
-                </div>
+                <div class="logo-box"><img src="${logoUrl}" alt="Logo"></div>
                 <div class="nome">${emp.n}</div>
                 <div class="ramo">${emp.r}</div>
                 <div class="info">📍 ${emp.e}</div>
                 <div class="info">📞 ${emp.t}</div>
-            </div>
-        `;
+            </div>`;
     });
 </script>
-
 </body>
 </html>

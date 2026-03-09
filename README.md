@@ -1,6 +1,6 @@
-# CDA-Lista
+# CDA Lista
 
-# Guia Comercial Digital - CDA
+# Guia Comercial Digital
 
 Um catálogo interativo e responsivo das empresas e prestadores de serviço da cidade de **Conceição do Araguaia - PA**. 
 
@@ -27,9 +27,3 @@ Cada registro de empresa no sistema contém:
 
 * **HTML5 & CSS3**: Estruturação e estilização moderna.
 * **JavaScript (Vanilla)**: Lógica de ordenação, filtros e manipulação do DOM (sem dependências externas).
-
-## Como utilizar
-
-1. Clone o repositório:
-   ```bash
-   git clone [https://github.com/SEU_USUARIO/guia-cda.git](https://github.com/SEU_USUARIO/guia-cda.git)

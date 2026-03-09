@@ -17,27 +17,16 @@
         .container { max-width: 1200px; margin: auto; }
         
         header { text-align: center; margin-bottom: 20px; }
-        h1 { color: var(--primary); margin-bottom: 10px; }
+        h1 { color: var(--primary); margin-bottom: 5px; }
+        .slogan { font-style: italic; color: #7f8c8d; margin-bottom: 10px; font-size: 1.1em; }
+        .contador { font-weight: bold; color: var(--accent); margin-bottom: 25px; font-size: 0.9em; text-transform: uppercase; }
 
-        /* Estilo da Barra de Busca */
-        .busca-container {
-            max-width: 600px;
-            margin: 0 auto 40px auto;
-            position: relative;
-        }
-
+        .busca-container { max-width: 600px; margin: 0 auto 40px auto; }
         #inputBusca {
-            width: 100%;
-            padding: 15px 20px;
-            font-size: 1.1em;
-            border: 2px solid #ddd;
-            border-radius: 30px;
-            outline: none;
-            transition: 0.3s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            width: 100%; padding: 15px 20px; font-size: 1.1em; border: 2px solid #ddd;
+            border-radius: 30px; outline: none; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
-
-        #inputBusca:focus { border-color: var(--accent); box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2); }
+        #inputBusca:focus { border-color: var(--accent); }
 
         .grid-empresas {
             display: grid;
@@ -46,32 +35,17 @@
         }
 
         .card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            transition: 0.3s;
+            background: var(--card-bg); border-radius: 10px; padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); display: flex;
+            flex-direction: column; align-items: center; text-align: center; transition: 0.3s;
         }
-
         .card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
 
         .logo-box {
-            width: 70px;
-            height: 70px;
-            background: #eee;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            overflow: hidden;
-            border: 2px solid var(--accent);
+            width: 75px; height: 75px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; margin-bottom: 15px;
+            overflow: hidden; border: 2px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-
         .logo-box img { width: 100%; height: 100%; object-fit: cover; }
 
         .nome { font-weight: bold; font-size: 1.1em; color: var(--primary); margin-bottom: 5px; text-transform: uppercase; }
@@ -83,10 +57,9 @@
             background-color: var(--whatsapp-color); color: #FFF; border-radius: 50px;
             text-align: center; font-size: 30px; box-shadow: 2px 2px 3px #999;
             z-index: 1000; display: flex; align-items: center; justify-content: center;
-            text-decoration: none; transition: 0.3s;
         }
 
-        footer { margin-top: 50px; text-align: center; padding: 20px; border-top: 1px solid #ddd; color: #666; font-size: 0.9em; }
+        footer { margin-top: 50px; text-align: center; padding: 30px; border-top: 1px solid #ddd; color: #666; font-size: 0.95em; line-height: 1.6; }
         footer a { color: var(--accent); text-decoration: none; font-weight: bold; }
     </style>
 </head>
@@ -95,16 +68,20 @@
 <div class="container">
     <header>
         <h1>Guia de Empresas - Conceição do Araguaia</h1>
+        <div class="slogan">Conectando o comércio local ao cidadão araguaiense.</div>
+        <div class="contador" id="txtContador">Carregando empresas...</div>
     </header>
 
     <div class="busca-container">
-        <input type="text" id="inputBusca" placeholder="🔍 Buscar por nome ou ramo (ex: tecnologia)..." onkeyup="filtrarEmpresas()">
+        <input type="text" id="inputBusca" placeholder="🔍 Buscar por nome ou ramo..." onkeyup="filtrarEmpresas()">
     </div>
 
     <div class="grid-empresas" id="lista-empresas"></div>
 
     <footer>
         <p>© 2026 CDA-Lista - Desenvolvido por: <a href="https://razgo.com.br/" target="_blank">RAZGO</a></p>
+        <p>Conceição do Araguaia - PA</p>
+        <p><strong>Contato:</strong> (94) 99250-0073</p>
     </footer>
 </div>
 
@@ -113,77 +90,73 @@
 </a>
 
 <script>
-    const dados = [
+    // 1. Dados das Empresas (Principais + Automáticas)
+    const empresasPrincipais = [
         {n: "RAZGO", r: "Tecnologia", e: "Centro", t: "(94) 991**-****"},
         {n: "MAZZ", r: "Educação", e: "Centro", t: "(94) 991**-****"},
         {n: "MR TREINAMENTOS", r: "Educação", e: "Centro", t: "(94) 991**-****"},
         {n: "KM PROJETOS", r: "Engenharia", e: "Vila Cruzeiro", t: "(94) 991**-****"},
         {n: "Academia Força Viva", r: "Fitness", e: "Av. Frei Gil", t: "(94) 991**-****"},
         {n: "AgroForte Araguaia", r: "Agronegócio", e: "Av. J.K", t: "(94) 991**-****"},
-        {n: "Auto Escola Piloto", r: "Educação", e: "Centro", t: "(94) 991**-****"},
-        {n: "Boutique Estilo", r: "Vestuário", e: "Av. 7 de Setembro", t: "(94) 991**-****"},
         {n: "Construa CDA", r: "Engenharia", e: "Av. Magalhães Barata", t: "(94) 991**-****"},
         {n: "Drogaria Araguaia", r: "Saúde", e: "Praça da Matriz", t: "(94) 991**-****"},
         {n: "Hotel Rio Araguaia", r: "Hotelaria", e: "Beira Rio", t: "(94) 991**-****"},
-        {n: "Imobiliária Norte", r: "Imóveis", e: "Av. J.K", t: "(94) 991**-****"},
-        {n: "Informática CDA", r: "Tecnologia", e: "Rua da República", t: "(94) 991**-****"},
-        {n: "Lanchonete Burguer", r: "Gastronomia", e: "Praça da Matriz", t: "(94) 991**-****"},
-        {n: "Marmoraria Pedrasul", r: "Construção", e: "Setor Industrial", t: "(94) 991**-****"},
-        {n: "Oficina do Zé", r: "Mecânica", e: "Setor Tancredo Neves", t: "(94) 991**-****"},
-        {n: "Panificadora Central", r: "Alimentos", e: "Centro", t: "(94) 991**-****"},
-        {n: "Peixaria do Araguaia", r: "Alimentos", e: "Mercado Municipal", t: "(94) 991**-****"},
-        {n: "Pesqueiro Real", r: "Lazer", e: "Beira Rio", t: "(94) 991**-****"},
-        {n: "Supermercado Econômico", r: "Varejo", e: "Bairro São Luiz", t: "(94) 991**-****"}
+        {n: "Informática CDA", r: "Tecnologia", e: "Rua da República", t: "(94) 991**-****"}
     ];
 
-    // Gerar empresas fictícias para completar 200 itens
-    const ramos = ["Comércio", "Serviços", "Indústria", "Beleza", "Transporte"];
-    for(let i=1; i<=180; i++) {
-        dados.push({
-            n: `Empresa Exemplo ${i}`, 
+    const ramos = ["Comércio", "Serviços", "Indústria", "Alimentos", "Saúde"];
+    const dadosCompletos = [...empresasPrincipais];
+
+    // Gerar até completar 200 empresas
+    for(let i = 1; i <= 190; i++) {
+        dadosCompletos.push({
+            n: `Empresa Parceira ${i}`, 
             r: ramos[Math.floor(Math.random() * ramos.length)], 
-            e: "Conceição do Araguaia", 
+            e: "Conceição do Araguaia - PA", 
             t: "(94) 991**-****"
         });
     }
 
-    dados.sort((a, b) => a.n.localeCompare(b.n));
+    // Ordenar Alfabeticamente
+    dadosCompletos.sort((a, b) => a.n.localeCompare(b.n));
+
+    // 2. Cores para as logos (Aleatórias)
+    const coresHex = ["2ecc71", "e67e22", "9b59b6", "e74c3c", "1abc9c", "34495e", "f1c40f", "d35400", "27ae60", "2980b9"];
 
     function renderizar(lista) {
-    const grid = document.getElementById('lista-empresas');
-    grid.innerHTML = "";
-    
-    // Lista de cores aleatórias para as logos
-    const cores = ["2ecc71", "e67e22", "9b59b6", "e74c3c", "1abc9c", "34495e", "f1c40f", "d35400", "27ae60", "2980b9"];
+        const grid = document.getElementById('lista-empresas');
+        const txtContador = document.getElementById('txtContador');
+        grid.innerHTML = "";
+        
+        // Atualiza o contador de empresas
+        txtContador.innerText = `${lista.length} empresas cadastradas`;
 
-    lista.forEach(emp => {
-        // Escolhe uma cor aleatória da lista acima para o fundo da logo
-        const corAleatoria = cores[Math.floor(Math.random() * cores.length)];
-        
-        // Link da logo com a cor sorteada e iniciais brancas
-        const logoUrl = `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(emp.n)}&backgroundColor=${corAleatoria}&fontFamily=Arial&fontWeight=700&fontColor=ffffff`;
-        
-        grid.innerHTML += `
-            <div class="card">
-                <div class="logo-box"><img src="${logoUrl}" alt="Logo"></div>
-                <div class="nome">${emp.n}</div>
-                <div class="ramo">${emp.r}</div>
-                <div class="info">📍 ${emp.e}</div>
-                <div class="info">📞 ${emp.t}</div>
-            </div>`;
-    });
-}
+        lista.forEach(emp => {
+            const cor = coresHex[Math.floor(Math.random() * coresHex.length)];
+            const logoUrl = `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(emp.n)}&backgroundColor=${cor}&fontFamily=Arial&fontWeight=700&fontColor=ffffff`;
+            
+            grid.innerHTML += `
+                <div class="card">
+                    <div class="logo-box"><img src="${logoUrl}" alt="Logo"></div>
+                    <div class="nome">${emp.n}</div>
+                    <div class="ramo">${emp.r}</div>
+                    <div class="info">📍 ${emp.e}</div>
+                    <div class="info">📞 ${emp.t}</div>
+                </div>`;
+        });
+    }
 
     function filtrarEmpresas() {
         const termo = document.getElementById('inputBusca').value.toLowerCase();
-        const filtrados = dados.filter(emp => 
+        const filtrados = dadosCompletos.filter(emp => 
             emp.n.toLowerCase().includes(termo) || 
             emp.r.toLowerCase().includes(termo)
         );
         renderizar(filtrados);
     }
 
-    renderizar(dados);
+    // Inicializar o site
+    renderizar(dadosCompletos);
 </script>
 </body>
 </html>

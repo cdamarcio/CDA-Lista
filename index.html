@@ -51,8 +51,24 @@
         .nome { font-weight: bold; font-size: 1.1em; color: var(--primary); margin-bottom: 5px; text-transform: uppercase; }
         .ramo { color: var(--accent); font-size: 0.9em; font-weight: bold; margin-bottom: 10px; }
         .info { font-size: 0.85em; color: #666; margin: 2px 0; }
+        
+        /* Estilo do link de telefone/whatsapp */
+        .zap-link {
+            color: var(--whatsapp-color);
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border: 1px solid var(--whatsapp-color);
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+        .zap-link:hover { background: var(--whatsapp-color); color: #fff; }
 
-        .btn-whatsapp {
+        .btn-whatsapp-float {
             position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px;
             background-color: var(--whatsapp-color); color: #FFF; border-radius: 50px;
             text-align: center; font-size: 30px; box-shadow: 2px 2px 3px #999;
@@ -85,50 +101,44 @@
     </footer>
 </div>
 
-<a href="https://wa.me/5594992500073" class="btn-whatsapp" target="_blank">
+<a href="https://wa.me/5594992500073" class="btn-whatsapp-float" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35" alt="Zap">
 </a>
 
 <script>
-    // 1. Dados das Empresas (Principais + Automáticas)
+    // 1. Dados das Empresas (Corrigido para usar o formato 94991...)
     const empresasPrincipais = [
-        {n: "RAZGO", r: "Tecnologia", e: "Centro", t: "(94) 991**-****"},
-        {n: "MAZZ", r: "Educação", e: "Centro", t: "(94) 991**-****"},
-        {n: "MR TREINAMENTOS", r: "Educação", e: "Centro", t: "(94) 991**-****"},
-        {n: "KM PROJETOS", r: "Engenharia", e: "Vila Cruzeiro", t: "(94) 991**-****"},
-        {n: "Academia Força Viva", r: "Fitness", e: "Av. Frei Gil", t: "(94) 991**-****"},
-        {n: "AgroForte Araguaia", r: "Agronegócio", e: "Av. J.K", t: "(94) 991**-****"},
-        {n: "Construa CDA", r: "Engenharia", e: "Av. Magalhães Barata", t: "(94) 991**-****"},
-        {n: "Drogaria Araguaia", r: "Saúde", e: "Praça da Matriz", t: "(94) 991**-****"},
-        {n: "Hotel Rio Araguaia", r: "Hotelaria", e: "Beira Rio", t: "(94) 991**-****"},
-        {n: "Informática CDA", r: "Tecnologia", e: "Rua da República", t: "(94) 991**-****"}
+        {n: "RAZGO", r: "Tecnologia", e: "Centro", t: "94992500073", f: "(94) 99250-0073"},
+        {n: "MAZZ", r: "Educação", e: "Centro", t: "62996466033", f: "(62) 99646-6033"},
+        {n: "MR TREINAMENTOS", r: "Educação", e: "Centro", t: "62996466033", f: "(62) 99646-6033"},
+        {n: "KM PROJETOS", r: "Engenharia", e: "Vila Cruzeiro", t: "94992500073", f: "(94) 99250-0073"},
+        {n: "Academia Força Viva", r: "Fitness", e: "Av. Frei Gil", t: "94991000000", f: "(94) 991**-****"},
+        {n: "AgroForte Araguaia", r: "Agronegócio", e: "Av. J.K", t: "94991000000", f: "(94) 991**-****"},
+        {n: "Construa CDA", r: "Engenharia", e: "Av. Magalhães Barata", t: "94991000000", f: "(94) 991**-****"}
     ];
 
     const ramos = ["Comércio", "Serviços", "Indústria", "Alimentos", "Saúde"];
     const dadosCompletos = [...empresasPrincipais];
 
     // Gerar até completar 200 empresas
-    for(let i = 1; i <= 190; i++) {
+    for(let i = 1; i <= 193; i++) {
         dadosCompletos.push({
             n: `Empresa Parceira ${i}`, 
             r: ramos[Math.floor(Math.random() * ramos.length)], 
             e: "Conceição do Araguaia - PA", 
-            t: "(94) 991**-****"
+            t: "94991000000", 
+            f: "(94) 991**-****"
         });
     }
 
-    // Ordenar Alfabeticamente
     dadosCompletos.sort((a, b) => a.n.localeCompare(b.n));
 
-    // 2. Cores para as logos (Aleatórias)
     const coresHex = ["2ecc71", "e67e22", "9b59b6", "e74c3c", "1abc9c", "34495e", "f1c40f", "d35400", "27ae60", "2980b9"];
 
     function renderizar(lista) {
         const grid = document.getElementById('lista-empresas');
         const txtContador = document.getElementById('txtContador');
         grid.innerHTML = "";
-        
-        // Atualiza o contador de empresas
         txtContador.innerText = `${lista.length} empresas cadastradas`;
 
         lista.forEach(emp => {
@@ -141,7 +151,9 @@
                     <div class="nome">${emp.n}</div>
                     <div class="ramo">${emp.r}</div>
                     <div class="info">📍 ${emp.e}</div>
-                    <div class="info">📞 ${emp.t}</div>
+                    <a href="https://wa.me/55${emp.t}" class="zap-link" target="_blank">
+                        📞 ${emp.f}
+                    </a>
                 </div>`;
         });
     }
@@ -155,7 +167,6 @@
         renderizar(filtrados);
     }
 
-    // Inicializar o site
     renderizar(dadosCompletos);
 </script>
 </body>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Empresa</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; padding: 20px; background: #f4f4f9; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); max-width: 400px; width: 100%; text-align: center; }
+        img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; background: #eee; }
+        h2 { margin: 10px 0; color: #333; }
+        p { color: #666; margin: 5px 0; font-size: 1.1em; }
+        .btn-voltar { display: inline-block; margin-top: 20px; text-decoration: none; color: #1a73e8; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="conteudo">
+        <p>Carregando dados...</p>
+    </div>
+
+    <script>
+        // Banco de dados das empresas
+        const dadosEmpresas = {
+            "km-projetos": { nome: "KM PROJETOS", ramo: "Engenharia", local: "Vila Cruzeiro", tel: "(94) 99250-0073", foto: "img/km.jpg" },
+            "mazz": { nome: "MAZZ", ramo: "Educação", local: "Centro", tel: "(62) 99646-6033", foto: "img/mazz.jpg" },
+            "mr-treinamentos": { nome: "MR TREINAMENTOS", ramo: "Educação", local: "Centro", tel: "(62) 99646-6033", foto: "img/mr.jpg" },
+            "razgo": { nome: "RAZGO", ramo: "Tecnologia", local: "Centro", tel: "(62) 99646-6033", foto: "img/razgo.jpg" }
+        };
+
+        // Pega o ID da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        const empresa = dadosEmpresas[id];
+
+        const container = document.getElementById('conteudo');
+
+        if (empresa) {
+            container.innerHTML = `
+                <img src="${empresa.foto}" alt="Logo ${empresa.nome}">
+                <h2>${empresa.nome}</h2>
+                <p><strong>Setor:</strong> ${empresa.ramo}</p>
+                <p>📍 ${empresa.local}</p>
+                <p>📞 ${empresa.tel}</p>
+                <a href="index.html" class="btn-voltar">← Voltar para a lista</a>
+            `;
+        } else {
+            container.innerHTML = "<h2>Empresa não encontrada</h2><a href='index.html'>Voltar</a>";
+        }
+    </script>
+</body>
+</html>

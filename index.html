@@ -3,192 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CDA-Lista | Guia Comercial</title>
+    <title>CDA-Lista | Conceição do Araguaia</title>
     <style>
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --success-color: #25d366; /* Cor WhatsApp */
-            --bg-color: #f3f4f6;
-            --text-color: #1f2937;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            padding: 20px 0;
-            background: #fff;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
+        /* --- SEU CSS BASE --- */
+        body { font-family: sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
+        header { text-align: center; background: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        
+        .grid-empresas {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
         }
 
-        .card {
-            background: white;
+        .card-empresa {
+            background: #fff;
             padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
+            border-radius: 8px;
             cursor: pointer;
+            border-left: 5px solid #007bff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: 0.3s;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+        .card-empresa:hover { transform: scale(1.02); }
 
-        .card h3 { margin: 0 0 10px 0; color: var(--primary-color); }
-
-        /* Modal Styles */
-        .modal {
+        /* --- CSS DO MODAL (BLINDADO) --- */
+        .modal-overlay {
             display: none;
             position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
         }
 
-        .modal-content {
-            background-color: #fff;
-            margin: 10% auto;
-            padding: 25px;
+        .modal-container {
+            background: #fff;
             width: 90%;
             max-width: 500px;
+            padding: 25px;
             border-radius: 15px;
             position: relative;
-            animation: slideIn 0.3s ease-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .close {
+        .btn-fechar {
             position: absolute;
-            right: 20px;
-            top: 15px;
-            font-size: 28px;
-            font-weight: bold;
+            top: 10px; right: 15px;
+            font-size: 30px;
             cursor: pointer;
-            color: #667;
+            color: #666;
         }
 
         .btn-whatsapp {
             display: block;
-            background-color: var(--success-color);
-            color: white;
+            background: #25d366;
+            color: #fff;
             text-align: center;
-            padding: 12px;
-            text-decoration: none;
+            padding: 15px;
             border-radius: 8px;
-            margin-top: 20px;
+            text-decoration: none;
             font-weight: bold;
+            margin-top: 20px;
         }
 
-        #dadosEmpresa img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
+        .info-label { font-weight: bold; color: #555; display: block; margin-top: 10px; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>CDA-Lista</h1>
-    <p>O Guia Comercial de Conceição do Araguaia</p>
+    <p>Encontre tudo em Conceição do Araguaia</p>
 </header>
 
-<div class="container" id="listaEmpresas">
-    </div>
+<div id="lista" class="grid-empresas">
+    <p>Carregando empresas...</p>
+</div>
 
-<div id="modalEmpresa" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="fecharModal()">&times;</span>
-        <div id="dadosEmpresa">
+<div id="meuModal" class="modal-overlay" onclick="fecharModalExterno(event)">
+    <div class="modal-container">
+        <span class="btn-fechar" onclick="fecharModal()">&times;</span>
+        <div id="conteudoModal">
             </div>
     </div>
 </div>
 
 <script>
-    // Exemplo de dados (Normalmente viriam do seu dados.json)
-    const empresas = [
-        {
-            id: 1,
-            nome: "Exemplo de Comércio CDA",
-            categoria: "Alimentação",
-            telefone: "(94) 99999-0000",
-            endereco: "Av. Araguaia, Centro",
-            descricao: "O melhor atendimento de Conceição do Araguaia.",
-            whatsapp: "5594999990000",
-            imagem: "https://via.placeholder.com/400x200"
-        }
-    ];
+    let empresasDados = [];
 
-    function carregarLista() {
-        const container = document.getElementById('listaEmpresas');
-        container.innerHTML = empresas.map(empresa => `
-            <div class="card" onclick="verEmpresa(${empresa.id})">
-                <h3>${empresa.nome}</h3>
-                <p>📍 ${empresa.categoria}</p>
-                <small>Clique para ver detalhes</small>
+    // 1. Carregar os dados do JSON
+    async function carregarDados() {
+        try {
+            const resposta = await fetch('dados.json');
+            empresasDados = await resposta.json();
+            renderizarLista(empresasDados);
+        } catch (erro) {
+            console.error("Erro ao carregar dados.json:", erro);
+            document.getElementById('lista').innerHTML = "Erro ao carregar lista.";
+        }
+    }
+
+    // 2. Mostrar a lista na tela
+    function renderizarLista(lista) {
+        const container = document.getElementById('lista');
+        container.innerHTML = lista.map(item => `
+            <div class="card-empresa" onclick="abrirModal('${item.id}')">
+                <h3>${item.nome}</h3>
+                <p>${item.categoria || 'Comércio'}</p>
             </div>
         `).join('');
     }
 
-    function verEmpresa(id) {
-        const empresa = empresas.find(e => e.id === id);
-        const container = document.getElementById('dadosEmpresa');
-        
-        container.innerHTML = `
-            <img src="${empresa.imagem}" alt="${empresa.nome}">
-            <h2>${empresa.nome}</h2>
-            <p><strong>Categoria:</strong> ${empresa.categoria}</p>
-            <p><strong>Endereço:</strong> ${empresa.endereco}</p>
-            <p><strong>Telefone:</strong> ${empresa.telefone}</p>
-            <hr>
-            <p>${empresa.descricao}</p>
-            <a href="https://wa.me/${empresa.whatsapp}" target="_blank" class="btn-whatsapp">
-                Falar no WhatsApp
+    // 3. Função do Modal
+    function abrirModal(id) {
+        const empresa = empresasDados.find(e => e.id == id);
+        if (!empresa) return;
+
+        const conteudo = document.getElementById('conteudoModal');
+        conteudo.innerHTML = `
+            <h2 style="color:#007bff; margin-top:0;">${empresa.nome}</h2>
+            <span class="info-label">📍 Endereço:</span>
+            <span>${empresa.endereco || 'Não informado'}</span>
+            
+            <span class="info-label">📞 Telefone:</span>
+            <span>${empresa.telefone || 'Sem telefone'}</span>
+
+            <span class="info-label">📝 Sobre:</span>
+            <p>${empresa.descricao || 'Empresa parceira de CDA.'}</p>
+
+            <a href="https://wa.me/55${empresa.whatsapp}" target="_blank" class="btn-whatsapp">
+                Chamar no WhatsApp
             </a>
         `;
-        
-        document.getElementById('modalEmpresa').style.display = "block";
+        document.getElementById('meuModal').style.display = 'flex';
     }
 
     function fecharModal() {
-        document.getElementById('modalEmpresa').style.display = "none";
+        document.getElementById('meuModal').style.display = 'none';
     }
 
-    // Fechar modal ao clicar fora dele
-    window.onclick = function(event) {
-        const modal = document.getElementById('modalEmpresa');
-        if (event.target == modal) fecharModal();
+    function fecharModalExterno(e) {
+        if (e.target.id === 'meuModal') fecharModal();
     }
 
-    // Inicializar
-    carregarLista();
+    // Iniciar tudo
+    carregarDados();
 </script>
 
 </body>

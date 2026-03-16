@@ -1,46 +1,44 @@
+/* --- CONFIGURAÇÕES INICIAIS --- */
 let empresas = [];
 let categoriaAtual = 'Todas';
 let favoritos = JSON.parse(localStorage.getItem('cda_favoritos')) || [];
 
+// Seletores do DOM
 const listaPrincipal = document.getElementById('listaPrincipal');
 const modal = document.getElementById('modalDetalhes');
 const conteudoModal = document.getElementById('conteudoEmpresa');
 const btnFechar = document.getElementById('btnFechar');
+const inputBusca = document.getElementById('inputBusca');
 
+/* --- 1. CARREGAMENTO DE DADOS --- */
 async function carregar() {
     try {
         const res = await fetch('dados.json');
-        if (!res.ok) throw new Error("Não foi possível encontrar o arquivo dados.json");
-        
-        const texto = await res.text(); // Lemos como texto primeiro para validar
-        try {
-            empresas = JSON.parse(texto);
-            renderizar(empresas);
-        } catch (e) {
-            console.error("Erro de sintaxe no JSON:", e);
-            listaPrincipal.innerHTML = `<div style="text-align:center; padding:20px; color:red;">
-                <h3>Erro no arquivo de dados!</h3>
-                <p>Existe um erro de pontuação no seu <b>dados.json</b> próximo à linha do erro apontado no console (F12).</p>
-            </div>`;
-        }
+        if (!res.ok) throw new Error("Erro ao carregar dados.json");
+        empresas = await res.json();
+        renderizar(empresas);
     } catch (err) {
-        listaPrincipal.innerHTML = "<p style='text-align:center;'>Erro ao conectar com o servidor.</p>";
+        console.error("Erro:", err);
+        listaPrincipal.innerHTML = "<p style='text-align:center; padding:20px;'>Erro ao carregar o guia. Verifique sua conexão.</p>";
     }
 }
 
+/* --- 2. RENDERIZAÇÃO DOS CARDS --- */
 function renderizar(dados) {
     if (!listaPrincipal) return;
+    
+    // Efeito de transição suave
     listaPrincipal.style.opacity = '0';
     
     setTimeout(() => {
         if (!dados || dados.length === 0) {
-            listaPrincipal.innerHTML = "<p style='grid-column: 1/-1; text-align:center;'>Nenhum item encontrado.</p>";
+            listaPrincipal.innerHTML = "<p style='grid-column: 1/-1; text-align:center; padding:40px;'>Nenhuma empresa encontrada.</p>";
         } else {
             listaPrincipal.innerHTML = dados.map(emp => {
                 const isFav = favoritos.includes(emp.id);
                 return `
                 <div class="card" style="animation: fadeInSuave 0.5s ease forwards;">
-                    <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorito(event, '${emp.id}')">
+                    <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorito(event, '${emp.id}')" title="Favoritar">
                         ${isFav ? '★' : '☆'}
                     </button>
                     <div onclick="abrirModal('${emp.id}')">
@@ -52,76 +50,110 @@ function renderizar(dados) {
             `}).join('');
         }
         listaPrincipal.style.opacity = '1';
-    }, 100);
+    }, 150);
 }
 
+/* --- 3. SISTEMA DE FAVORITOS --- */
 function toggleFavorito(event, id) {
-    event.stopPropagation();
+    event.stopPropagation(); // Não abre o modal ao clicar na estrela
     const index = favoritos.indexOf(id);
-    index > -1 ? favoritos.splice(index, 1) : favoritos.push(id);
+    
+    if (index > -1) {
+        favoritos.splice(index, 1);
+    } else {
+        favoritos.push(id);
+    }
+    
     localStorage.setItem('cda_favoritos', JSON.stringify(favoritos));
     
+    // Atualiza a tela mantendo o filtro atual
     if (categoriaAtual === 'Favoritos') {
         mostrarFavoritos();
     } else {
-        renderizar(filtrarDados());
+        filtrar();
     }
 }
 
 function mostrarFavoritos() {
     categoriaAtual = 'Favoritos';
-    atualizarBotoes('⭐ Favoritos');
+    atualizarBotoesAtivos('⭐ Favoritos');
     const filtrados = empresas.filter(e => favoritos.includes(e.id));
     renderizar(filtrados);
 }
 
+/* --- 4. SISTEMA DE FILTROS (ABAS E BUSCA) --- */
 function filtrarPorCategoria(cat) {
     categoriaAtual = cat;
-    const nomesBotoes = {
+    
+    // Mapeamento de texto dos botões para garantir o destaque correto
+    const labels = {
         'Todas': 'Todas',
+        'Oficina': 'Oficinas',
+        'Marketing': 'Marketing',
+        'Engenharia': 'Engenharia',
+        'TI': 'TI/Informática',
         'Restaurante': 'Restaurantes',
-        'Hotel': 'Hotéis',
-        'Supermercado': 'Mercados',
-        'Farmácia': 'Saúde'
+        'Hotel': 'Hotéis'
     };
-    atualizarBotoes(nomesBotoes[cat] || 'Todas');
-    renderizar(filtrarDados());
+
+    atualizarBotoesAtivos(labels[cat]);
+    filtrar();
 }
 
 function filtrar() {
-    renderizar(filtrarDados());
+    const termo = inputBusca.value.toLowerCase();
+    
+    const filtrados = empresas.filter(e => {
+        const matchesCategory = (categoriaAtual === 'Todas' || e.categoria === categoriaAtual);
+        const matchesSearch = e.nome.toLowerCase().includes(termo) || 
+                              e.categoria.toLowerCase().includes(termo);
+        
+        // Se estiver na aba de favoritos, filtra apenas entre os favoritos
+        if (categoriaAtual === 'Favoritos') {
+            return favoritos.includes(e.id) && matchesSearch;
+        }
+        
+        return matchesCategory && matchesSearch;
+    });
+
+    renderizar(filtrados);
 }
 
-function filtrarDados() {
-    const termo = document.getElementById('inputBusca').value.toLowerCase();
-    return empresas.filter(e => 
-        (categoriaAtual === 'Todas' || e.categoria === categoriaAtual) &&
-        e.nome.toLowerCase().includes(termo)
-    );
-}
-
-function atualizarBotoes(textoAtivo) {
+function atualizarBotoesAtivos(textoBotao) {
     document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.innerText === textoAtivo);
+        btn.classList.toggle('active', btn.innerText === textoBotao);
     });
 }
 
+/* --- 5. MODAL DE DETALHES --- */
 function abrirModal(id) {
     const e = empresas.find(item => item.id == id);
     if (!e) return;
+
     conteudoModal.innerHTML = `
         <img src="${e.logo}" class="logo-modal" onerror="this.src='https://via.placeholder.com/120?text=LOGO'">
-        <h2>${e.nome}</h2>
-        <p><strong>📍 Endereço:</strong> ${e.endereco}</p>
-        <p><strong>📝 Sobre:</strong> ${e.descricao}</p>
-        <p><strong>📞 Contato:</strong> ${e.telefone}</p>
-        <a href="https://wa.me/55${e.whatsapp.replace(/\D/g,'')}" target="_blank" class="link-whatsapp">Falar no WhatsApp</a>
+        <h2 style="color: #1e40af; margin-bottom: 15px;">${e.nome}</h2>
+        <div style="text-align: left; font-size: 0.95rem;">
+            <p><strong>📍 Endereço:</strong> ${e.endereco || 'Conceição do Araguaia - PA'}</p>
+            <p style="margin: 10px 0;"><strong>📝 Sobre:</strong> ${e.descricao || 'Atendimento de qualidade em CDA.'}</p>
+            <p><strong>📞 Contato:</strong> ${e.telefone || '(94) 99250-0073'}</p>
+        </div>
+        <a href="https://wa.me/55${e.whatsapp.replace(/\D/g,'')}" target="_blank" class="link-whatsapp">
+            Falar no WhatsApp
+        </a>
     `;
     modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Trava o scroll do fundo
 }
 
-function fecharModal() { modal.style.display = 'none'; }
+function fecharModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Destrava o scroll
+}
+
+/* --- EVENTOS --- */
 if(btnFechar) btnFechar.onclick = fecharModal;
 window.onclick = (e) => { if (e.target == modal) fecharModal(); };
 
+// Iniciar app
 carregar();

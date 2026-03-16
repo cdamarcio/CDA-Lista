@@ -3,189 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CDA Lista | O Guia Comercial de Conceição do Araguaia</title>
+    <title>CDA-Lista | Guia Comercial</title>
     <style>
         :root {
-            --primary: #1a73e8;
-            --bg: #f8f9fa;
-            --text: #333;
-            --whatsapp: #25d366;
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --success-color: #25d366; /* Cor WhatsApp */
+            --bg-color: #f3f4f6;
+            --text-color: #1f2937;
         }
 
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            margin: 0; 
-            padding: 0; 
-            display: flex; 
-            flex-direction: column; 
-            min-height: 100vh; 
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
         }
 
-        .container { flex: 1; padding: 20px; }
-        .header { text-align: center; max-width: 800px; margin: 0 auto 30px; }
-        
-        #busca {
-            width: 100%;
-            max-width: 500px;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 30px;
-            font-size: 16px;
-            display: block;
-            margin: 20px auto;
-            outline: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        header {
+            text-align: center;
+            padding: 20px 0;
+            background: #fff;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .grid-empresas {
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
-            max-width: 1100px;
-            margin: auto;
         }
 
         .card {
             background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            text-decoration: none;
-            color: inherit;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            transition: 0.3s;
-            border: 1px solid #eee;
-            display: flex;
-            flex-direction: column;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+            cursor: pointer;
         }
 
-        .card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .card:hover {
+            transform: translateY(-5px);
+        }
 
-        .card-img-container {
+        .card h3 { margin: 0 0 10px 0; color: var(--primary-color); }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
             width: 100%;
-            height: 150px;
-            background: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            box-sizing: border-box;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
         }
 
-        .card-img { max-width: 100%; max-height: 100%; object-fit: contain; }
-        .card-info { padding: 15px; text-align: center; }
-        .card-info h3 { margin: 5px 0; color: var(--primary); }
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 25px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
 
-        /* Rodapé Atualizado */
-        footer {
-            margin-top: 50px;
-            padding: 30px;
-            background: #333;
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #667;
+        }
+
+        .btn-whatsapp {
+            display: block;
+            background-color: var(--success-color);
             color: white;
             text-align: center;
-            border-radius: 15px 15px 0 0;
-        }
-
-        footer p { margin: 8px 0; }
-        footer a { color: var(--primary); text-decoration: none; font-weight: bold; }
-
-        /* Botão Flutuante do WhatsApp */
-        .btn-zap-flutuante {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 25px;
-            right: 25px;
-            background-color: var(--whatsapp);
-            color: #FFF;
-            border-radius: 50px;
-            text-align: center;
-            font-size: 30px;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 12px;
             text-decoration: none;
-            transition: transform 0.3s;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-weight: bold;
         }
 
-        .btn-zap-flutuante:hover {
-            transform: scale(1.1);
+        #dadosEmpresa img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
-
-        .btn-zap-flutuante svg { width: 35px; height: 35px; fill: white; }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="header">
+<header>
+    <h1>CDA-Lista</h1>
+    <p>O Guia Comercial de Conceição do Araguaia</p>
+</header>
 
-            <h1>CDA Lista</h1>
-
-            <h1>O Guia Comercial de Conceição do Araguaia - PA</h1>
-
-            <p id="contador" style="color: #888; font-weight: bold;">Carregando empresas...</p>
-            <input type="text" id="busca" placeholder="🔍 Buscar empresa..." onkeyup="filtrar()">
-        </div>
-
-        <div class="grid-empresas" id="lista-grid"></div>
+<div class="container" id="listaEmpresas">
     </div>
 
-    <footer>
-        <p><strong>CDA Lista | O Guia Comercial de Conceição do Araguaia</strong></p>        
-        <p>(62) 99646-6033 | © 2026 Todos os direitos reservados</p>
-        <p style="font-size: 0.9em; color: #bbb;">
-            Desenvolvido por: <a href="https://razgo.com.br" target="_blank">RAZGO</a>
-        </p>
-    </footer>
+<div id="modalEmpresa" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="fecharModal()">&times;</span>
+        <div id="dadosEmpresa">
+            </div>
+    </div>
+</div>
 
-    <a href="https://wa.me/5562996466033" class="btn-zap-flutuante" target="_blank" title="Falar no WhatsApp">
-        <svg viewBox="0 0 32 32">
-            <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.733 5.476 2.016 7.781l-2.016 7.219 7.391-1.94c2.207 1.127 4.71 1.767 7.369 1.767 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.333c-2.408 0-4.664-0.612-6.637-1.685l-0.476-0.259-4.385 1.151 1.171-4.192-0.285-0.453c-1.189-1.896-1.888-4.14-1.888-6.547 0-7.359 5.987-13.345 13.345-13.345s13.345 5.987 13.345 13.345-5.987 13.345-13.345 13.345zM22.459 18.915c-0.355-0.177-2.101-1.037-2.435-1.157-0.332-0.12-0.575-0.177-0.816 0.177s-0.933 1.157-1.144 1.396c-0.211 0.239-0.421 0.271-0.776 0.092-0.355-0.177-1.497-0.552-2.853-1.759-1.055-0.94-1.767-2.101-1.973-2.456-0.207-0.355-0.023-0.547 0.156-0.723 0.161-0.159 0.355-0.421 0.533-0.633s0.236-0.355 0.355-0.591c0.12-0.239 0.060-0.448-0.031-0.627s-0.816-1.971-1.117-2.696c-0.293-0.707-0.591-0.612-0.816-0.624-0.211-0.011-0.451-0.013-0.691-0.013s-0.631 0.089-0.961 0.448c-0.332 0.355-1.268 1.241-1.268 3.027s1.301 3.509 1.481 3.748c0.18 0.239 2.56 3.909 6.2 5.476 0.865 0.373 1.54 0.596 2.067 0.764 0.871 0.276 1.663 0.237 2.289 0.144 0.699-0.104 2.101-0.859 2.397-1.688 0.297-0.831 0.297-1.54 0.208-1.688s-0.324-0.244-0.68-0.423z"></path>
-        </svg>
-    </a>
-
-    <script>
-        const empresas = [
-            { id: 'km-projetos', nome: 'KM Projetos de Engenharia', setor: 'Engenharia', foto: 'img/km.png' },
-            { id: 'mazz', nome: 'MAZZ', setor: 'Educação', foto: 'img/01.png' },
-            { id: 'mr-treinamentos', nome: 'MR Treinamentos', setor: 'Educação', foto: 'img/mr.jpg' },
-            { id: 'razgo', nome: 'RAZGO', setor: 'Tecnologia', foto: 'img/razgo.jpg' }
-        ];
-
-        function renderizar(dados) {
-            const grid = document.getElementById('lista-grid');
-            const contador = document.getElementById('contador');
-            grid.innerHTML = '';
-            
-            dados.sort((a,b) => a.nome.localeCompare(b.nome)).forEach(emp => {
-                const card = document.createElement('a');
-                card.href = `empresa.html?id=${emp.id}`;
-                card.className = 'card';
-                card.innerHTML = `
-                    <div class="card-img-container">
-                        <img src="${emp.foto}" class="card-img" alt="${emp.nome}" 
-                             onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'color:#ccc;font-weight:bold\'>LOGO</span>';">
-                    </div>
-                    <div class="card-info">
-                        <h3>${emp.nome}</h3>
-                        <p style="font-size: 0.85em; color: #666;">${emp.setor}</p>
-                    </div>`;
-                grid.appendChild(card);
-            });
-            contador.innerText = `${dados.length} empresas encontradas`;
+<script>
+    // Exemplo de dados (Normalmente viriam do seu dados.json)
+    const empresas = [
+        {
+            id: 1,
+            nome: "Exemplo de Comércio CDA",
+            categoria: "Alimentação",
+            telefone: "(94) 99999-0000",
+            endereco: "Av. Araguaia, Centro",
+            descricao: "O melhor atendimento de Conceição do Araguaia.",
+            whatsapp: "5594999990000",
+            imagem: "https://via.placeholder.com/400x200"
         }
+    ];
 
-        function filtrar() {
-            const termo = document.getElementById('busca').value.toLowerCase();
-            const filtradas = empresas.filter(e => e.nome.toLowerCase().includes(termo) || e.setor.toLowerCase().includes(termo));
-            renderizar(filtradas);
-        }
+    function carregarLista() {
+        const container = document.getElementById('listaEmpresas');
+        container.innerHTML = empresas.map(empresa => `
+            <div class="card" onclick="verEmpresa(${empresa.id})">
+                <h3>${empresa.nome}</h3>
+                <p>📍 ${empresa.categoria}</p>
+                <small>Clique para ver detalhes</small>
+            </div>
+        `).join('');
+    }
 
-        renderizar(empresas);
-    </script>
+    function verEmpresa(id) {
+        const empresa = empresas.find(e => e.id === id);
+        const container = document.getElementById('dadosEmpresa');
+        
+        container.innerHTML = `
+            <img src="${empresa.imagem}" alt="${empresa.nome}">
+            <h2>${empresa.nome}</h2>
+            <p><strong>Categoria:</strong> ${empresa.categoria}</p>
+            <p><strong>Endereço:</strong> ${empresa.endereco}</p>
+            <p><strong>Telefone:</strong> ${empresa.telefone}</p>
+            <hr>
+            <p>${empresa.descricao}</p>
+            <a href="https://wa.me/${empresa.whatsapp}" target="_blank" class="btn-whatsapp">
+                Falar no WhatsApp
+            </a>
+        `;
+        
+        document.getElementById('modalEmpresa').style.display = "block";
+    }
+
+    function fecharModal() {
+        document.getElementById('modalEmpresa').style.display = "none";
+    }
+
+    // Fechar modal ao clicar fora dele
+    window.onclick = function(event) {
+        const modal = document.getElementById('modalEmpresa');
+        if (event.target == modal) fecharModal();
+    }
+
+    // Inicializar
+    carregarLista();
+</script>
+
 </body>
 </html>

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página não encontrada | CDA Lista</title>
+    <title>Página não encontrada | CDA LISTA</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .erro-wrapper {
+        .erro-container {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -15,46 +15,48 @@
             text-align: center;
             padding: 20px;
         }
-        .erro-titulo {
-            font-size: 6rem;
-            font-weight: bold;
-            color: #1e40af;
-            margin: 0;
+        .erro-numero {
+            font-size: 8rem;
+            font-weight: 800;
+            color: var(--azul-escuro);
             line-height: 1;
+            margin: 0;
         }
-        .erro-subtitulo {
+        .erro-texto {
             font-size: 1.5rem;
-            margin: 10px 0 20px;
-            color: #334155;
+            margin: 20px 0;
+            color: var(--texto);
         }
-        .btn-home {
-            background-color: #3b82f6;
+        .btn-voltar {
+            background-color: var(--azul-claro);
             color: white;
-            padding: 15px 30px;
+            padding: 15px 35px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            transition: background 0.3s;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+            transition: 0.3s;
         }
-        .btn-home:hover {
-            background-color: #1d4ed8;
+        .btn-voltar:hover {
+            background-color: var(--azul-escuro);
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="img/logo-cda1.jpg" alt="CDA Lista" class="logo-cabecalho" id="main-logo">
-        <p>O Guia Comercial de Conceição do Araguaia - PA</p>
+        <img src="img/logo-cda3.jpg" alt="CDA Lista" class="logo-cabecalho" id="main-logo">
+        <h1 id="titulo-fallback">CDA LISTA</h1>
+        <p><strong>O Guia Comercial de Conceição do Araguaia - PA</strong></p>
     </header>
 
     <main class="container">
-        <div class="erro-wrapper">
-            <h2 class="erro-titulo">404</h2>
-            <p class="erro-subtitulo">Ops! Essa página não foi encontrada no Araguaia.</p>
-            <p style="margin-bottom: 30px;">O endereço pode ter sido digitado incorretamente ou a página não existe mais.</p>
-            <a href="index.html" class="btn-home">Voltar para o Início</a>
+        <div class="erro-container">
+            <h2 class="erro-numero">404</h2>
+            <p class="erro-texto">Ops! Essa página sumiu no Rio Araguaia.</p>
+            <p style="margin-bottom: 40px;">Não encontramos o que você procurava, mas não se preocupe!</p>
+            <a href="index.html" class="btn-voltar">Voltar para o Início</a>
         </div>
     </main>
 
@@ -63,7 +65,10 @@
             <p><strong>CDA Lista</strong> - Conectando o comércio local</p>
             <p>Conceição do Araguaia - PA</p>
             <p>(94) 99250-0073</p>
-            <p style="margin-top:10px;">Desenvolvido por <a href="https://razgo.com.br" target="_blank" style="color:#3b82f6; text-decoration:none;">RAZGO</a></p>
+            
+            <hr class="linha-divisoria">
+            
+            <p>Desenvolvido por <a href="https://razgo.com.br" target="_blank" style="color:#3b82f6; text-decoration:none; font-weight:bold;">RAZGO</a></p>
         </div>
     </footer>
 

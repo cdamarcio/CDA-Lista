@@ -8,6 +8,25 @@
 </head>
 <body>
 
+    <div id="popupAnuncio" class="modal-overlay" style="display: flex;">
+        <div class="modal-box popup-promocao">
+            <span class="btn-fechar" onclick="fecharPopup()">&times;</span>
+            <div class="popup-conteudo">
+                <h2 style="color: #1e40af; margin-bottom: 15px;">🚀 Destaque sua Empresa!</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 20px; line-height: 1.4;">
+                    Faça já a propaganda da sua empresa por apenas <br>
+                    <strong style="color: #25d366; font-size: 2rem;">R$ 69,99</strong>
+                </p>
+                <p style="margin-bottom: 25px; opacity: 0.8;">Apareça para toda Conceição do Araguaia e região!</p>
+                
+                <a href="https://wa.me/5594992500073?text=Olá! Quero fazer a propaganda da minha empresa no CDA LISTA." 
+                   target="_blank" class="link-whatsapp pulse-mini">
+                   Quero Anunciar Agora!
+                </a>
+            </div>
+        </div>
+    </div>
+
     <div id="sideMenu" class="side-menu">
         <div class="side-menu-header">
             <span class="btn-fechar-menu" onclick="toggleMenu()">&times;</span>
@@ -32,7 +51,6 @@
 
     <header>
         <button class="btn-menu-mobile" onclick="toggleMenu()">&#9776;</button>
-        
         <img src="img/logo-cda3.jpg" alt="CDA Lista" class="logo-cabecalho" id="main-logo">
         <h1 id="titulo-fallback">CDA LISTA</h1>
         <p><strong>O Guia Comercial de Conceição do Araguaia</strong></p>
@@ -59,7 +77,7 @@
 
     <div id="modalDetalhes" class="modal-overlay">
         <div class="modal-box">
-            <span class="btn-fechar" id="btnFechar" onclick="fecharModal()">&times;</span>
+            <span class="btn-fechar" onclick="fecharModal()">&times;</span>
             <div id="conteudoEmpresa"></div>
         </div>
     </div>
@@ -79,9 +97,7 @@
                     © 2026 Todos os direitos reservados
                 </p>
             </div>
-            
             <hr class="linha-divisoria">
-            
             <p class="creditos">Desenvolvido por <a href="https://razgo.com.br" target="_blank">RAZGO</a></p>
         </div>
     </footer>

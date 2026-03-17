@@ -1,7 +1,3 @@
-/* PROJETO: CDA LISTA - O GUIA COMERCIAL DE CONCEIÇÃO DO ARAGUAIA
-   PADRÃO: MÁRCIO RODRIGUES - VERSÃO FINAL REVISADA 2026
-*/
-
 :root {
     --azul-escuro: #1e40af;
     --azul-claro: #3b82f6;
@@ -12,347 +8,109 @@
     --dourado: #f59e0b;
 }
 
-* { 
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
-    -webkit-tap-highlight-color: transparent; 
-}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-body { 
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
-    background: var(--bg-cor); 
-    color: var(--texto); 
-    overflow-x: hidden; 
-}
+body { font-family: 'Segoe UI', sans-serif; background: var(--bg-cor); color: var(--texto); overflow-x: hidden; }
 
-/* --- HEADER --- */
+/* HEADER */
 header { 
-    background: var(--azul-escuro); 
-    color: white; 
-    text-align: center; 
-    padding: 60px 20px 40px; 
-    position: relative; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background: var(--azul-escuro); color: white; text-align: center; 
+    padding: 60px 20px 40px; position: relative; display: flex; flex-direction: column; align-items: center;
 }
 
-/* Botão Menu Mobile no Canto Superior Direito */
 .btn-menu-mobile { 
-    display: none; 
-    position: absolute; 
-    top: 25px; 
-    right: 20px; 
-    background: none; 
-    border: none; 
-    color: white; 
-    font-size: 32px; 
-    cursor: pointer; 
-    z-index: 100;
+    display: none; position: absolute; top: 25px; right: 20px; background: none; 
+    border: none; color: white; font-size: 32px; cursor: pointer; z-index: 100;
 }
 
-.logo-cabecalho { 
-    max-width: 150px; 
-    height: auto; 
-    margin-bottom: 15px; 
-    border-radius: 12px; 
-}
+.logo-cabecalho { max-width: 150px; height: auto; margin-bottom: 15px; border-radius: 12px; }
+#titulo-fallback { font-size: 2.5rem; font-weight: 900; color: var(--verde-zap); text-transform: uppercase; margin-bottom: 5px; }
 
-#titulo-fallback { 
-    font-size: 2.5rem; 
-    font-weight: 900; 
-    color: var(--verde-zap); 
-    text-transform: uppercase; 
-    margin-bottom: 5px; 
-}
-
-/* --- MENU LATERAL (SIDE MENU) --- */
+/* SIDE MENU (DIREITA) */
 .side-menu { 
-    position: fixed; 
-    top: 0; 
-    right: -280px; 
-    width: 280px; 
-    height: 100%; 
-    background: var(--branco); 
-    z-index: 3000; 
-    transition: 0.3s; 
-    box-shadow: -5px 0 15px rgba(0,0,0,0.1); 
-    padding: 20px; 
+    position: fixed; top: 0; right: -280px; width: 280px; height: 100%; 
+    background: var(--branco); z-index: 7000; transition: 0.3s; 
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1); padding: 20px; 
 }
-
 .side-menu.active { right: 0; }
-
-.side-menu-header { 
-    display: flex; 
-    flex-direction: row-reverse; 
-    justify-content: space-between; 
-    align-items: center; 
-    margin-bottom: 20px; 
-    border-bottom: 1px solid #eee; 
-    padding-bottom: 10px; 
-}
-
+.side-menu-header { display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
 .btn-fechar-menu { font-size: 35px; cursor: pointer; color: #94a3b8; }
-
-.menu-btn { 
-    display: block; 
-    width: 100%; 
-    text-align: left; 
-    padding: 15px; 
-    margin-bottom: 5px; 
-    border: none; 
-    background: none; 
-    font-size: 16px; 
-    font-weight: 600; 
-    border-radius: 8px; 
-    cursor: pointer; 
-}
-
+.menu-btn { display: block; width: 100%; text-align: left; padding: 15px; margin-bottom: 5px; border: none; background: none; font-size: 16px; font-weight: 600; border-radius: 8px; cursor: pointer; }
 .menu-btn.active { background: var(--azul-claro); color: white; }
-
-.overlay-menu { 
-    display: none; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    background: rgba(0,0,0,0.5); 
-    z-index: 2999; 
-}
-
+.overlay-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 6999; }
 .overlay-menu.active { display: block; }
 
-/* --- GRID & CARDS --- */
+/* GRID & CARDS */
 .container { max-width: 1200px; margin: 0 auto; padding: 15px; }
-
-.grid-container { 
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 20px; 
-}
-
-.card { 
-    background: var(--branco); 
-    padding: 20px; 
-    border-radius: 15px; 
-    text-align: center; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
-    position: relative; 
-    transition: 0.3s; 
-    cursor: pointer; 
-}
-
+.grid-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.card { background: var(--branco); padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; transition: 0.3s; cursor: pointer; }
 .card:hover { transform: translateY(-5px); }
-
-.logo-card { 
-    width: 75px; 
-    height: 75px; 
-    object-fit: contain; 
-    margin-bottom: 10px; 
-}
-
-.fav-btn { 
-    position: absolute; 
-    top: 10px; 
-    right: 10px; 
-    background: none; 
-    border: none; 
-    font-size: 1.5rem; 
-    color: #cbd5e1; 
-    cursor: pointer; 
-}
-
+.logo-card { width: 75px; height: 75px; object-fit: contain; margin-bottom: 10px; }
+.fav-btn { position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; color: #cbd5e1; cursor: pointer; }
 .fav-btn.active { color: var(--dourado); }
 
-/* --- CATEGORIAS NO PC (SEM ABAS ESCONDIDAS) --- */
+/* CATEGORIAS PC */
 .categorias-pc { display: block; margin: 30px 0; }
+.categorias-nav { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.tab-btn { background: var(--branco); border: 1px solid #e2e8f0; padding: 10px 20px; border-radius: 12px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+.tab-btn.active { background: var(--azul-claro); color: white; border-color: var(--azul-claro); }
 
-.categorias-nav { 
-    display: flex; 
-    gap: 10px; 
-    justify-content: center; 
-    flex-wrap: wrap; 
-}
+/* BUSCA */
+.busca-wrapper { margin: -30px auto 30px; width: 90%; max-width: 500px; position: relative; z-index: 10; }
+#inputBusca { width: 100%; padding: 18px 25px; border-radius: 50px; border: none; box-shadow: 0 8px 20px rgba(0,0,0,0.1); outline: none; font-size: 16px; }
 
-.tab-btn { 
-    background: var(--branco); 
-    border: 1px solid #e2e8f0; 
-    padding: 10px 20px; 
-    border-radius: 12px; 
-    cursor: pointer; 
-    font-weight: 600; 
-    transition: 0.2s; 
-}
-
-.tab-btn.active { 
-    background: var(--azul-claro); 
-    color: white; 
-    border-color: var(--azul-claro); 
-}
-
-/* --- BUSCA --- */
-.busca-wrapper { 
-    margin: -30px auto 30px; 
-    width: 90%; 
-    max-width: 500px; 
-    position: relative; 
-    z-index: 10; 
-}
-
-#inputBusca { 
-    width: 100%; 
-    padding: 18px 25px; 
-    border-radius: 50px; 
-    border: none; 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1); 
-    outline: none; 
-    font-size: 16px; 
-}
-
-/* --- MODAL (CONFIGURAÇÃO REDUZIDA) --- */
+/* MODAIS E POPUP */
 .modal-overlay { 
-    display: none; 
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
-    background: rgba(0, 0, 0, 0.85); 
-    z-index: 4000; 
-    align-items: center; 
-    justify-content: center; 
-    backdrop-filter: blur(5px);
-    padding: 15px;
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.85); z-index: 8000; align-items: center; justify-content: center; 
+    backdrop-filter: blur(5px); padding: 20px;
 }
-
 .modal-box { 
-    background: var(--branco); 
-    width: 100%;
-    max-width: 400px; 
-    max-height: 85vh; 
-    padding: 30px 20px; 
-    border-radius: 20px; 
-    position: relative; 
-    text-align: center;
-    overflow-y: auto;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    background: var(--branco); width: 100%; max-width: 400px; max-height: 85vh; 
+    padding: 30px 20px; border-radius: 20px; position: relative; text-align: center; 
+    overflow-y: auto; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
 }
+.btn-fechar { position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #333; }
 
-.btn-fechar { 
-    position: absolute; 
-    top: 10px; 
-    right: 15px; 
-    font-size: 28px; 
-    cursor: pointer; 
-    color: #333;
-}
+/* POPUP ESPECÍFICO */
+.popup-promocao { border: 3px solid var(--verde-zap); animation: slideIn 0.5s ease-out; }
+@keyframes slideIn { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-.logo-modal {
-    width: 110px; 
-    height: 110px;
-    object-fit: contain;
-    margin: 0 auto 15px;
-    display: block;
-    border-radius: 10px;
-}
+/* LOGO NO MODAL */
+.logo-modal { width: 110px; height: 110px; object-fit: contain; margin: 0 auto 15px; display: block; border-radius: 10px; }
+.info-empresa { text-align: left; margin: 15px 0; color: var(--texto); font-size: 14px; }
+.info-empresa p { margin-bottom: 10px; line-height: 1.4; }
 
-.info-empresa {
-    text-align: left;
-    margin: 15px 0;
-    color: var(--texto);
-    font-size: 14px;
-}
-
-.info-empresa p {
-    margin-bottom: 10px;
-    line-height: 1.4;
-}
-
-.link-whatsapp, .link-site { 
-    display: block; 
-    padding: 12px; 
-    border-radius: 10px; 
-    text-decoration: none; 
-    font-weight: bold; 
-    margin-top: 10px; 
-    color: white;
-    font-size: 14px;
-}
+.link-whatsapp, .link-site { display: block; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; margin-top: 10px; color: white; font-size: 14px; }
 .link-whatsapp { background: var(--verde-zap); }
 .link-site { background: var(--azul-escuro); }
 
-/* --- WHATSAPP FLUTUANTE PISCANDO --- */
+/* ANIMAÇÕES WHATSAPP */
 .btn-zap-flutuante { 
-    position: fixed; 
-    width: 60px; 
-    height: 60px; 
-    bottom: 25px; 
-    right: 25px; 
-    background: var(--verde-zap); 
-    border-radius: 50%; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    z-index: 1001; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    animation: pulse-green 2s infinite;
+    position: fixed; width: 60px; height: 60px; bottom: 25px; right: 25px; 
+    background: var(--verde-zap); border-radius: 50%; display: flex; 
+    align-items: center; justify-content: center; z-index: 1001; 
+    animation: pulse-green 2s infinite; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
-
 .btn-zap-flutuante img { width: 35px; }
+.pulse-mini { animation: pulse-mini-button 1.5s infinite; }
 
 @keyframes pulse-green {
     0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
     70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
     100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
 }
+@keyframes pulse-mini-button { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
 
-/* --- FOOTER (NOVO PADRÃO MÁRCIO) --- */
-footer { 
-    background: #000000; 
-    color: white; 
-    text-align: center; 
-    padding: 50px 20px; 
-    margin-top: 60px; 
-}
+/* FOOTER */
+footer { background: #000000; color: white; text-align: center; padding: 50px 20px; margin-top: 60px; }
+.txt-verde-zap strong { color: var(--verde-zap); font-size: 1.6rem; font-weight: 900; text-transform: uppercase; }
+.footer-info p { font-size: 1rem; line-height: 1.6; margin-top: 10px; opacity: 0.9; }
+.linha-divisoria { border: 0; border-top: 1px solid rgba(255, 255, 255, 0.2); margin: 25px auto; width: 60%; }
+.creditos a { color: var(--azul-claro); text-decoration: none; font-weight: bold; }
 
-.txt-verde-zap { 
-    color: var(--verde-zap); 
-    margin-bottom: 10px; 
-}
-
-.txt-verde-zap strong { 
-    font-size: 1.6rem; 
-    font-weight: 900; 
-    text-transform: uppercase;
-}
-
-.footer-info p { 
-    font-size: 1rem; 
-    line-height: 1.6; 
-    margin-bottom: 5px;
-    opacity: 0.9;
-}
-
-.linha-divisoria { 
-    border: 0; 
-    border-top: 1px solid rgba(255, 255, 255, 0.2); 
-    margin: 25px auto; 
-    width: 60%; 
-}
-
-.creditos a { 
-    color: var(--azul-claro); 
-    text-decoration: none; 
-    font-weight: bold; 
-}
-
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 1024px) { 
-    .grid-container { grid-template-columns: repeat(2, 1fr); } 
-}
-
+/* RESPONSIVIDADE */
+@media (max-width: 1024px) { .grid-container { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) {
     .btn-menu-mobile { display: block; }
     .categorias-pc { display: none; }

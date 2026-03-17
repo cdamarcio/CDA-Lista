@@ -1,4 +1,4 @@
-/* --- VARIÁVEIS E CONFIGURAÇÕES GERAIS --- */
+/* --- VARIÁVEIS E TEMA (CDA LISTA) --- */
 :root {
     --azul-escuro: #1e40af;
     --azul-claro: #3b82f6;
@@ -9,6 +9,7 @@
     --texto: #334155;
 }
 
+/* --- RESET BÁSICO --- */
 * { 
     box-sizing: border-box; 
     margin: 0; 
@@ -24,22 +25,24 @@ body {
     line-height: 1.5;
 }
 
-/* --- CABEÇALHO E LOGO --- */
+/* --- CABEÇALHO (LOGOTIPO E TÍTULO) --- */
 header { 
     background: var(--azul-escuro); 
     color: white; 
     text-align: center; 
-    padding: 40px 20px; 
+    padding: 50px 20px; 
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .logo-cabecalho {
-    max-width: 180px; /* Largura ideal para a logo */
+    max-width: 180px; 
     height: auto;
     margin-bottom: 15px;
-    border-radius: 8px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 #titulo-fallback {
@@ -67,6 +70,7 @@ header p {
     margin: -30px auto 25px; 
     width: 90%; 
     max-width: 500px; 
+    z-index: 10;
 }
 
 #inputBusca { 
@@ -81,20 +85,20 @@ header p {
 }
 
 #inputBusca:focus {
-    transform: scale(1.02);
+    transform: scale(1.03);
 }
 
-/* --- NAVEGAÇÃO POR ABAS (HORIZONTAL) --- */
+/* --- NAVEGAÇÃO POR ABAS (CATEGORIAS) --- */
 .categorias-nav {
     display: flex;
     gap: 12px;
     overflow-x: auto;
     padding: 10px 5px 30px;
-    scrollbar-width: none;
+    scrollbar-width: none; /* Firefox */
 }
 
 .categorias-nav::-webkit-scrollbar { 
-    display: none; 
+    display: none; /* Chrome/Safari */
 }
 
 .tab-btn {
@@ -152,6 +156,7 @@ header p {
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     border-bottom: 4px solid transparent;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .card:hover { 
@@ -168,19 +173,19 @@ header p {
 }
 
 .card h3 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     color: var(--azul-escuro);
     margin-bottom: 5px;
 }
 
 .card p {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: bold;
     color: #64748b;
     text-transform: uppercase;
 }
 
-/* Botão Favorito no Card */
+/* BOTÃO FAVORITO */
 .fav-btn {
     position: absolute;
     top: 15px;
@@ -201,7 +206,7 @@ header p {
     display: none; 
     position: fixed; 
     top: 0; left: 0; width: 100%; height: 100%; 
-    background: rgba(15, 23, 42, 0.9); 
+    background: rgba(15, 23, 42, 0.85); 
     z-index: 2000; 
     align-items: center; 
     justify-content: center;
@@ -211,7 +216,7 @@ header p {
 .modal-box { 
     background: var(--branco); 
     width: 92%; 
-    max-width: 480px; 
+    max-width: 450px; 
     padding: 40px 30px; 
     border-radius: 30px; 
     position: relative; 
@@ -220,7 +225,7 @@ header p {
 }
 
 @keyframes modalEntrada {
-    from { opacity: 0; transform: scale(0.8); }
+    from { opacity: 0; transform: scale(0.85); }
     to { opacity: 1; transform: scale(1); }
 }
 
@@ -231,13 +236,6 @@ header p {
     font-size: 35px; 
     cursor: pointer; 
     color: #94a3b8; 
-}
-
-.logo-modal {
-    width: 120px;
-    height: 120px;
-    object-fit: contain;
-    margin-bottom: 20px;
 }
 
 .link-whatsapp { 
@@ -253,18 +251,15 @@ header p {
     font-weight: bold; 
     margin-top: 30px; 
     font-size: 1.1rem;
-    transition: transform 0.2s;
 }
-
-.link-whatsapp:hover { transform: scale(1.03); }
 
 /* --- WHATSAPP FLUTUANTE --- */
 .btn-zap-flutuante { 
     position: fixed; 
-    width: 65px; 
-    height: 65px; 
-    bottom: 30px; 
-    right: 30px; 
+    width: 60px; 
+    height: 60px; 
+    bottom: 25px; 
+    right: 25px; 
     background: var(--verde-zap); 
     border-radius: 50%; 
     display: flex; 
@@ -272,11 +267,9 @@ header p {
     justify-content: center; 
     box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     z-index: 1001; 
-    transition: transform 0.3s;
 }
 
-.btn-zap-flutuante:hover { transform: rotate(15deg) scale(1.1); }
-.btn-zap-flutuante img { width: 38px; }
+.btn-zap-flutuante img { width: 35px; }
 
 /* --- RODAPÉ --- */
 footer { 
@@ -287,15 +280,21 @@ footer {
     margin-top: 60px; 
 }
 
-footer p { margin-bottom: 8px; font-size: 0.95rem; }
-
 footer a {
     color: var(--azul-claro);
     text-decoration: none;
     font-weight: bold;
 }
 
-/* ANIMAÇÃO DE ENTRADA DOS CARDS */
+/* --- AJUSTES MOBILE --- */
+@media (max-width: 600px) {
+    header { padding: 40px 10px; }
+    .logo-cabecalho { max-width: 140px; }
+    #titulo-fallback { font-size: 1.6rem; letter-spacing: 1px; }
+    header p { font-size: 0.85rem; }
+    .busca-wrapper { width: 95%; margin-top: -20px; }
+}
+
 @keyframes fadeInSuave {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }

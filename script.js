@@ -16,7 +16,7 @@ async function carregar() {
         renderizar(empresas);
     } catch (err) {
         console.error(err);
-        listaPrincipal.innerHTML = "<p>Erro ao carregar dados.</p>";
+        listaPrincipal.innerHTML = "<p>Erro ao carregar os dados.</p>";
     }
 }
 

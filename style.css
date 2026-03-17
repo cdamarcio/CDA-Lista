@@ -1,7 +1,7 @@
 :root {
     --azul-escuro: #1e40af;
     --azul-claro: #3b82f6;
-    --verde-zap: #25d366; /* Cor oficial do WhatsApp */
+    --verde-zap: #25d366;
     --dourado: #f59e0b;
     --bg-cor: #f1f5f9;
     --branco: #ffffff;
@@ -17,6 +17,7 @@ body {
     overflow-x: hidden;
 }
 
+/* --- HEADER --- */
 header { 
     background: var(--azul-escuro); 
     color: white; 
@@ -34,19 +35,17 @@ header {
     border-radius: 12px;
 }
 
-/* TÍTULO EM VERDE WHATSAPP SOLICITADO */
 #titulo-fallback {
     font-size: 2.5rem;
     font-weight: 900;
     letter-spacing: 2px;
     margin-bottom: 5px;
     text-transform: uppercase;
-    color: var(--verde-zap); /* Cor Verde WhatsApp */
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3); /* Sombra para destacar no azul */
+    color: var(--verde-zap);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
-header p { font-size: 1rem; }
-
+/* --- MAIN --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 15px; }
 
 .busca-wrapper { margin: -30px auto 25px; width: 90%; max-width: 500px; position: relative; z-index: 10; }
@@ -91,6 +90,7 @@ header p { font-size: 1rem; }
 }
 .fav-btn.active { color: var(--dourado); }
 
+/* --- MODAL --- */
 .modal-overlay { 
     display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
     background: rgba(15, 23, 42, 0.85); z-index: 2000; align-items: center; justify-content: center;
@@ -118,16 +118,25 @@ header p { font-size: 1rem; }
 }
 .btn-zap-flutuante img { width: 35px; }
 
-/* RODAPÉ PRETO */
+/* --- RODAPÉ PRETO FORMATADO --- */
 footer { 
     background: #000000; 
     color: white; 
     text-align: center; 
-    padding: 50px 20px; 
+    padding: 40px 20px; 
     margin-top: 60px; 
 }
 
-footer a { color: var(--azul-claro); text-decoration: none; font-weight: bold; }
+.footer-info p {
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+
+.txt-verde-zap {
+    color: var(--verde-zap);
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
 
 .linha-divisoria {
     border: 0;
@@ -136,12 +145,22 @@ footer a { color: var(--azul-claro); text-decoration: none; font-weight: bold; }
     width: 60%;
 }
 
-@media (max-width: 1024px) { .grid-container { grid-template-columns: repeat(2, 1fr); } }
+.creditos a { 
+    color: var(--azul-claro); 
+    text-decoration: none; 
+    font-weight: bold; 
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 1024px) { 
+    .grid-container { grid-template-columns: repeat(2, 1fr); } 
+}
 
 @media (max-width: 600px) {
-    .grid-container { grid-template-columns: 1fr; }
+    .grid-container { grid-template-columns: 1fr; } /* 1 POR LINHA NO MOBILE */
     header { padding: 40px 10px; }
     .logo-cabecalho { max-width: 140px; }
     #titulo-fallback { font-size: 1.8rem; }
     .linha-divisoria { width: 85%; }
+    .footer-info p { font-size: 0.9rem; }
 }

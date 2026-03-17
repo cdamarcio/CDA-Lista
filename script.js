@@ -1,7 +1,7 @@
 let empresas = [];
 let categoriaAtual = 'Todas';
 let favoritos = JSON.parse(localStorage.getItem('cda_favoritos')) || [];
-let tempoPopup = 5;
+let tempoPopup = 10; // ALTERADO PARA 10 SEGUNDOS
 let intervaloPopup;
 
 async function carregar() {
@@ -74,7 +74,7 @@ function abrirModal(id) {
     if (!e) return;
     const botaoSite = e.site ? `<a href="${e.site}" target="_blank" class="link-site">Visitar Website</a>` : '';
     
-    // TODAS AS EMPRESAS ABREM O SEU WHATSAPP PARA ORÇAMENTO / ANÚNCIO
+    // WHATSAPP CENTRALIZADO PARA VOCÊ (MÁRCIO)
     const zapGeral = "94992500073";
 
     document.getElementById('conteudoEmpresa').innerHTML = `

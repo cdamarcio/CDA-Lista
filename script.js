@@ -37,7 +37,6 @@ function toggleMenu() {
 function filtrarPorCategoria(cat) {
     categoriaAtual = cat;
     if (document.getElementById('sideMenu').classList.contains('active')) toggleMenu();
-    
     document.querySelectorAll('.tab-btn, .menu-btn').forEach(btn => {
         btn.classList.toggle('active', btn.innerText.includes(cat) || (cat === 'Todas' && btn.innerText === 'Todas'));
     });

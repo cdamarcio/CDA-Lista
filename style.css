@@ -1,68 +1,4 @@
-:root {
-    --azul-escuro: #1e40af;
-    --azul-claro: #3b82f6;
-    --verde-zap: #25d366;
-    --bg-cor: #f1f5f9;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg-cor); color: #334155; overflow-x: hidden; }
-
-header { background: var(--azul-escuro); color: white; text-align: center; padding: 40px 15px; }
-header h1 { font-size: 1.8rem; }
-
-.container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 15px; }
-
-/* Busca Responsiva */
-.busca-wrapper { margin: -25px auto 20px; width: 95%; text-align: center; }
-#inputBusca { width: 100%; padding: 15px; border-radius: 25px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-size: 16px; outline: none; }
-
-/* Navegação por Abas (Scroll Horizontal no Mobile) */
-.categorias-nav {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding: 10px 5px 25px;
-    scrollbar-width: none; /* Firefox */
-}
-.categorias-nav::-webkit-scrollbar { display: none; } /* Chrome/Safari */
-
-.tab-btn {
-    background: white;
-    border: 2px solid var(--azul-claro);
-    color: var(--azul-escuro);
-    padding: 8px 18px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    white-space: nowrap;
-    font-size: 14px;
-}
-.tab-btn.active { background: var(--azul-claro); color: white; }
-
-/* Grid Mobile First (1 coluna no celular, 2 em tablets, 3+ no desktop) */
-.grid-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 15px;
-}
-
-@media (min-width: 600px) { .grid-container { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 900px) { .grid-container { grid-template-columns: repeat(3, 1fr); } }
-
-.card { 
-    background: white; padding: 20px; border-radius: 15px; position: relative;
-    text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05); border-top: 4px solid var(--azul-claro);
-}
-
-.logo-card { width: 70px; height: 70px; object-fit: contain; margin-bottom: 10px; }
-
-/* Modal Mobile (Ocupa quase toda a tela no celular) */
-.modal-box { 
-    background: white; width: 90%; max-width: 450px; padding: 25px; 
-    border-radius: 20px; position: relative; text-align: center;
-}/* --- VARIÁVEIS E BASE --- */
+/* --- VARIÁVEIS E CONFIGURAÇÕES GERAIS --- */
 :root {
     --azul-escuro: #1e40af;
     --azul-claro: #3b82f6;
@@ -70,6 +6,7 @@ header h1 { font-size: 1.8rem; }
     --dourado: #f59e0b;
     --bg-cor: #f1f5f9;
     --branco: #ffffff;
+    --texto: #334155;
 }
 
 * { 
@@ -82,8 +19,9 @@ header h1 { font-size: 1.8rem; }
 body { 
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
     background: var(--bg-cor); 
-    color: #334155; 
+    color: var(--texto); 
     overflow-x: hidden;
+    line-height: 1.5;
 }
 
 /* --- CABEÇALHO E LOGO --- */
@@ -92,25 +30,40 @@ header {
     color: white; 
     text-align: center; 
     padding: 40px 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .logo-cabecalho {
-    max-width: 180px;
+    max-width: 180px; /* Largura ideal para a logo */
     height: auto;
     margin-bottom: 10px;
+    border-radius: 8px; /* Opcional: arredonda cantos da imagem da logo */
 }
 
-header h1 { font-size: 2rem; }
-header p { opacity: 0.9; font-size: 0.9rem; }
+header h1 { 
+    font-size: 1.8rem; 
+    margin-bottom: 5px;
+}
 
+header p { 
+    opacity: 0.9; 
+    font-size: 0.9rem; 
+}
+
+/* --- CONTAINER E BUSCA --- */
 .container { 
     max-width: 1100px; 
     margin: 0 auto; 
     padding: 15px; 
 }
 
-/* --- BUSCA E ABAS --- */
-.busca-wrapper { margin: -25px auto 20px; width: 100%; max-width: 500px; }
+.busca-wrapper { 
+    margin: -25px auto 20px; 
+    width: 100%; 
+    max-width: 500px; 
+}
 
 #inputBusca { 
     width: 100%; 
@@ -122,41 +75,63 @@ header p { opacity: 0.9; font-size: 0.9rem; }
     outline: none;
 }
 
+/* --- NAVEGAÇÃO POR ABAS (MOBILE FIRST) --- */
 .categorias-nav {
     display: flex;
     gap: 10px;
-    overflow-x: auto;
-    padding: 10px 0 25px;
-    scrollbar-width: none;
+    overflow-x: auto; /* Permite deslizar o dedo no celular */
+    padding: 10px 5px 25px;
+    scrollbar-width: none; /* Esconde scroll no Firefox */
 }
-.categorias-nav::-webkit-scrollbar { display: none; }
+
+.categorias-nav::-webkit-scrollbar { 
+    display: none; /* Esconde scroll no Chrome/Safari */
+}
 
 .tab-btn {
     background: var(--branco);
     border: 2px solid var(--azul-claro);
     color: var(--azul-escuro);
-    padding: 10px 20px;
+    padding: 8px 18px;
     border-radius: 50px;
     cursor: pointer;
     font-weight: bold;
-    white-space: nowrap;
-    transition: 0.3s;
+    white-space: nowrap; /* Não quebra linha no botão */
+    transition: 0.3s ease;
+    font-size: 14px;
 }
 
-.tab-btn.active { background: var(--azul-claro); color: white; }
-.tab-btn-fav { border-color: var(--dourado); color: var(--dourado); }
-.tab-btn-fav.active { background: var(--dourado); color: white; }
+.tab-btn.active { 
+    background: var(--azul-claro); 
+    color: white; 
+}
 
-/* --- GRID E CARDS --- */
+.tab-btn-fav { 
+    border-color: var(--dourado); 
+    color: var(--dourado); 
+}
+
+.tab-btn-fav.active { 
+    background: var(--dourado); 
+    color: white; 
+}
+
+/* --- GRID DE EMPRESAS --- */
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr; /* Mobile First */
+    grid-template-columns: 1fr; /* 1 coluna no celular */
     gap: 20px;
 }
 
-@media (min-width: 600px) { .grid-container { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1000px) { .grid-container { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 600px) { 
+    .grid-container { grid-template-columns: repeat(2, 1fr); } 
+}
 
+@media (min-width: 1000px) { 
+    .grid-container { grid-template-columns: repeat(3, 1fr); } 
+}
+
+/* --- CARDS --- */
 .card { 
     background: var(--branco); 
     padding: 25px; 
@@ -165,13 +140,34 @@ header p { opacity: 0.9; font-size: 0.9rem; }
     text-align: center; 
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     border-top: 5px solid var(--azul-claro);
-    transition: transform 0.3s;
+    transition: transform 0.2s;
+    cursor: pointer;
 }
-.card:hover { transform: translateY(-5px); }
 
-.logo-card { width: 80px; height: 80px; object-fit: contain; margin-bottom: 15px; }
+.card:hover { 
+    transform: translateY(-5px); 
+}
 
-/* Botão Favorito no Card */
+.logo-card { 
+    width: 80px; 
+    height: 80px; 
+    object-fit: contain; 
+    margin-bottom: 15px; 
+}
+
+.card h3 {
+    font-size: 1.2rem;
+    color: var(--azul-escuro);
+    margin-bottom: 5px;
+}
+
+.card p {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #64748b;
+}
+
+/* Botão Favorito dentro do Card */
 .fav-btn {
     position: absolute;
     top: 15px;
@@ -181,29 +177,51 @@ header p { opacity: 0.9; font-size: 0.9rem; }
     font-size: 1.6rem;
     cursor: pointer;
     color: #cbd5e1;
+    transition: color 0.2s;
 }
-.fav-btn.active { color: var(--dourado); }
+
+.fav-btn.active { 
+    color: var(--dourado); 
+}
 
 /* --- MODAL --- */
 .modal-overlay { 
     display: none; 
     position: fixed; 
     top: 0; left: 0; width: 100%; height: 100%; 
-    background: rgba(0,0,0,0.85); 
+    background: rgba(0,0,0,0.8); 
     z-index: 2000; 
-    align-items: center; justify-content: center;
+    align-items: center; 
+    justify-content: center;
     backdrop-filter: blur(5px);
 }
+
 .modal-box { 
     background: var(--branco); 
     width: 90%; 
-    max-width: 480px; 
+    max-width: 450px; 
     padding: 30px; 
     border-radius: 25px; 
     position: relative; 
     text-align: center;
 }
-.btn-fechar { position: absolute; top: 15px; right: 20px; font-size: 35px; cursor: pointer; color: #94a3b8; }
+
+.btn-fechar { 
+    position: absolute; 
+    top: 10px; 
+    right: 20px; 
+    font-size: 35px; 
+    cursor: pointer; 
+    color: #94a3b8; 
+}
+
+.logo-modal {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
+
 .link-whatsapp { 
     display: block; 
     background: var(--verde-zap); 
@@ -213,37 +231,48 @@ header p { opacity: 0.9; font-size: 0.9rem; }
     text-decoration: none; 
     font-weight: bold; 
     margin-top: 25px; 
+    transition: opacity 0.2s;
 }
+
+.link-whatsapp:hover { opacity: 0.9; }
 
 /* --- WHATSAPP FLUTUANTE --- */
 .btn-zap-flutuante { 
-    position: fixed; width: 60px; height: 60px; bottom: 25px; right: 25px; 
-    background: var(--verde-zap); border-radius: 50%; display: flex; 
-    align-items: center; justify-content: center; z-index: 1001; 
-    animation: pulsar 2s infinite; 
+    position: fixed; 
+    width: 60px; 
+    height: 60px; 
+    bottom: 25px; 
+    right: 25px; 
+    background: var(--verde-zap); 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 1001; 
 }
-@keyframes pulsar {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-    70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+
+.btn-zap-flutuante img { 
+    width: 35px; 
 }
-.btn-zap-flutuante img { width: 35px; }
 
 /* --- RODAPÉ --- */
-footer { background: #0f172a; color: white; text-align: center; padding: 40px 15px; margin-top: 50px; }
+footer { 
+    background: #0f172a; 
+    color: white; 
+    text-align: center; 
+    padding: 40px 15px; 
+    margin-top: 50px; 
+}
 
-/* Animação Fade-in */
+footer a {
+    color: var(--azul-claro);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ANIMAÇÃO DE ENTRADA */
 @keyframes fadeInSuave {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
-/* WhatsApp Flutuante Menor no Mobile */
-.btn-zap-flutuante { 
-    position: fixed; width: 55px; height: 55px; bottom: 20px; right: 20px; 
-    background: var(--verde-zap); border-radius: 50%; display: flex; 
-    align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 1000;
-}
-.btn-zap-flutuante img { width: 30px; height: 30px; }
-
-footer { background: #1e293b; color: #f1f5f9; text-align: center; padding: 30px 15px; margin-top: 40px; }

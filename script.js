@@ -19,7 +19,7 @@ function renderizar(dados) {
         return `
             <div class="card">
                 <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorito(event, '${emp.id}')">★</button>
-                <div onclick="abrirModal('${emp.id}')" style="cursor:pointer">
+                <div onclick="abrirModal('${emp.id}')">
                     <img src="${emp.logo}" class="logo-card" onerror="this.src='https://img.icons8.com/fluency/150/group-of-companies.png'">
                     <h3>${emp.nome}</h3>
                     <p><strong>${emp.categoria}</strong></p>
@@ -47,7 +47,7 @@ function filtrar() {
     const termo = document.getElementById('inputBusca').value.toLowerCase();
     const filtrados = empresas.filter(e => {
         const mCat = (categoriaAtual === 'Todas' || e.categoria === categoriaAtual);
-        const mBusca = e.nome.toLowerCase().includes(termo);
+        const mBusca = e.nome.toLowerCase().includes(termo) || e.categoria.toLowerCase().includes(termo);
         return mCat && mBusca;
     });
     renderizar(filtrados);

@@ -47,7 +47,7 @@ function filtrar() {
     const termo = document.getElementById('inputBusca').value.toLowerCase();
     const filtrados = empresas.filter(e => {
         const mCat = (categoriaAtual === 'Todas' || e.categoria === categoriaAtual);
-        const mBusca = e.nome.toLowerCase().includes(termo);
+        const mBusca = e.nome.toLowerCase().includes(termo) || e.categoria.toLowerCase().includes(termo);
         return mCat && mBusca;
     });
     renderizar(filtrados);

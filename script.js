@@ -26,7 +26,7 @@ function renderizar(dados) {
             <div class="card">
                 <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorito(event, '${emp.id}')">★</button>
                 <div onclick="abrirModal('${emp.id}')">
-                    <img src="${emp.logo}" class="logo-card">
+                    <img src="${emp.logo}" class="logo-card" onerror="this.src='https://img.icons8.com/fluency/150/group-of-companies.png'">
                     <h3>${emp.nome}</h3>
                     <p><strong>${emp.categoria}</strong></p>
                 </div>
@@ -40,8 +40,12 @@ function filtrarPorCategoria(cat) {
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.toggle('active', btn.innerText.includes(cat) || (cat === 'Todas' && btn.innerText === 'Todas'));
     });
-    // Efeito de scroll na aba
-    event.target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    
+    // Scroll suave apenas se estiver no mobile
+    if(window.innerWidth < 600) {
+        event.target.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+    
     filtrar();
 }
 
@@ -73,7 +77,7 @@ function abrirModal(id) {
     if (!e) return;
     const botaoSite = e.site ? `<a href="${e.site}" target="_blank" class="link-site">Visitar Website</a>` : '';
     document.getElementById('conteudoEmpresa').innerHTML = `
-        <img src="${e.logo}" class="logo-modal" style="width:100px">
+        <img src="${e.logo}" class="logo-modal" style="width:100px" onerror="this.src='https://img.icons8.com/fluency/150/group-of-companies.png'">
         <h2>${e.nome}</h2>
         <div style="text-align: left; margin-top:15px;">
             <p><strong>📍 Endereço:</strong> ${e.endereco}</p>

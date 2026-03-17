@@ -12,7 +12,6 @@
 
 body { font-family: 'Segoe UI', sans-serif; background: var(--bg-cor); color: var(--texto); overflow-x: hidden; }
 
-/* HEADER */
 header { 
     background: var(--azul-escuro); color: white; text-align: center; 
     padding: 60px 20px 40px; position: relative; display: flex; flex-direction: column; align-items: center;
@@ -26,7 +25,6 @@ header {
 .logo-cabecalho { max-width: 150px; height: auto; margin-bottom: 15px; border-radius: 12px; }
 #titulo-fallback { font-size: 2.5rem; font-weight: 900; color: var(--verde-zap); text-transform: uppercase; margin-bottom: 5px; }
 
-/* SIDE MENU (DIREITA) */
 .side-menu { 
     position: fixed; top: 0; right: -280px; width: 280px; height: 100%; 
     background: var(--branco); z-index: 7000; transition: 0.3s; 
@@ -40,7 +38,6 @@ header {
 .overlay-menu { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 6999; }
 .overlay-menu.active { display: block; }
 
-/* GRID & CARDS */
 .container { max-width: 1200px; margin: 0 auto; padding: 15px; }
 .grid-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .card { background: var(--branco); padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; transition: 0.3s; cursor: pointer; }
@@ -49,17 +46,14 @@ header {
 .fav-btn { position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; color: #cbd5e1; cursor: pointer; }
 .fav-btn.active { color: var(--dourado); }
 
-/* CATEGORIAS PC */
 .categorias-pc { display: block; margin: 30px 0; }
 .categorias-nav { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 .tab-btn { background: var(--branco); border: 1px solid #e2e8f0; padding: 10px 20px; border-radius: 12px; cursor: pointer; font-weight: 600; transition: 0.2s; }
 .tab-btn.active { background: var(--azul-claro); color: white; border-color: var(--azul-claro); }
 
-/* BUSCA */
 .busca-wrapper { margin: -30px auto 30px; width: 90%; max-width: 500px; position: relative; z-index: 10; }
 #inputBusca { width: 100%; padding: 18px 25px; border-radius: 50px; border: none; box-shadow: 0 8px 20px rgba(0,0,0,0.1); outline: none; font-size: 16px; }
 
-/* MODAIS E POPUP */
 .modal-overlay { 
     display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
     background: rgba(0,0,0,0.85); z-index: 8000; align-items: center; justify-content: center; 
@@ -73,11 +67,9 @@ header {
 .btn-fechar { position: absolute; top: 10px; right: 15px; font-size: 28px; cursor: pointer; color: #333; }
 #contador { font-size: 14px; background: #eee; padding: 2px 6px; border-radius: 10px; margin-right: 5px; font-weight: bold; }
 
-/* POPUP ESPECÍFICO */
 .popup-promocao { border: 3px solid var(--verde-zap); animation: slideIn 0.5s ease-out; }
 @keyframes slideIn { from { transform: translateY(-30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-/* LOGO NO MODAL */
 .logo-modal { width: 110px; height: 110px; object-fit: contain; margin: 0 auto 15px; display: block; border-radius: 10px; }
 .info-empresa { text-align: left; margin: 15px 0; color: var(--texto); font-size: 14px; }
 .info-empresa p { margin-bottom: 10px; line-height: 1.4; }
@@ -86,7 +78,6 @@ header {
 .link-whatsapp { background: var(--verde-zap); }
 .link-site { background: var(--azul-escuro); }
 
-/* ANIMAÇÕES WHATSAPP */
 .btn-zap-flutuante { 
     position: fixed; width: 60px; height: 60px; bottom: 25px; right: 25px; 
     background: var(--verde-zap); border-radius: 50%; display: flex; 
@@ -103,14 +94,12 @@ header {
 }
 @keyframes pulse-mini-button { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
 
-/* FOOTER */
 footer { background: #000000; color: white; text-align: center; padding: 50px 20px; margin-top: 60px; }
 .txt-verde-zap strong { color: var(--verde-zap); font-size: 1.6rem; font-weight: 900; text-transform: uppercase; }
 .footer-info p { font-size: 1rem; line-height: 1.6; margin-top: 10px; opacity: 0.9; }
 .linha-divisoria { border: 0; border-top: 1px solid rgba(255, 255, 255, 0.2); margin: 25px auto; width: 60%; }
 .creditos a { color: var(--azul-claro); text-decoration: none; font-weight: bold; }
 
-/* RESPONSIVIDADE */
 @media (max-width: 1024px) { .grid-container { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) {
     .btn-menu-mobile { display: block; }

@@ -73,6 +73,10 @@ function abrirModal(id) {
     const e = empresas.find(i => i.id == id);
     if (!e) return;
     const botaoSite = e.site ? `<a href="${e.site}" target="_blank" class="link-site">Visitar Website</a>` : '';
+    
+    // TODAS AS EMPRESAS ABREM O SEU WHATSAPP PARA ORÇAMENTO / ANÚNCIO
+    const zapGeral = "94992500073";
+
     document.getElementById('conteudoEmpresa').innerHTML = `
         <img src="${e.logo}" class="logo-modal" onerror="this.src='https://img.icons8.com/fluency/150/group-of-companies.png'">
         <h2 style="color:#1e40af; margin-bottom:5px; font-size:1.4rem;">${e.nome}</h2>
@@ -82,7 +86,7 @@ function abrirModal(id) {
             <p>📞 <strong>Contato:</strong> ${e.telefone}</p>
             <p>📝 <strong>Sobre:</strong> ${e.descricao}</p>
         </div>
-        <a href="https://wa.me/55${e.whatsapp.replace(/\D/g,'')}" target="_blank" class="link-whatsapp">WhatsApp</a>
+        <a href="https://wa.me/55${zapGeral}?text=Olá! Gostaria de mais informações sobre ${e.nome} que vi no CDA LISTA." target="_blank" class="link-whatsapp">Falar com Consultor</a>
         ${botaoSite}
     `;
     document.getElementById('modalDetalhes').style.display = 'flex';
@@ -94,7 +98,6 @@ function fecharModal() {
     document.body.style.overflow = 'auto';
 }
 
-// LOGICA DO POPUP COM CRONOMETRO
 function fecharPopup() {
     clearInterval(intervaloPopup);
     document.getElementById('popupAnuncio').style.display = 'none';

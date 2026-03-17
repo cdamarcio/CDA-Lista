@@ -20,11 +20,12 @@ function renderizar(dados) {
     if (!listaPrincipal) return;
     listaPrincipal.innerHTML = dados.map(emp => {
         const isFav = favoritos.includes(emp.id);
+        const logoPadrao = "https://img.icons8.com/fluency/150/group-of-companies.png";
         return `
             <div class="card">
                 <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorito(event, '${emp.id}')">★</button>
                 <div onclick="abrirModal('${emp.id}')" style="cursor:pointer">
-                    <img src="${emp.logo || 'https://via.placeholder.com/85'}" class="logo-card">
+                    <img src="${emp.logo || logoPadrao}" class="logo-card" onerror="this.src='${logoPadrao}'">
                     <h3>${emp.nome}</h3>
                     <p><strong>${emp.categoria}</strong></p>
                 </div>

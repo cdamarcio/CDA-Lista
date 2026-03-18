@@ -1,13 +1,14 @@
 let empresas = [];
 let categoriaAtual = 'Todas';
 let favoritos = JSON.parse(localStorage.getItem('cda_favoritos')) || [];
-let tempoPopup = 10; // ALTERADO PARA 10 SEGUNDOS
+let tempoPopup = 10;
 let intervaloPopup;
 
 async function carregar() {
     try {
         const res = await fetch('dados.json');
         const dados = await res.json();
+        // Ordem Alfabética Automática
         empresas = dados.sort((a, b) => a.nome.localeCompare(b.nome));
         renderizar(empresas);
     } catch (err) { console.error(err); }
@@ -18,11 +19,12 @@ function renderizar(dados) {
     if (!lista) return;
     lista.innerHTML = dados.map(emp => {
         const isFav = favoritos.includes(emp.id);
+        const imgPath = emp.logo || 'https://img.icons8.com/fluency/150/group-of-companies.png';
         return `
             <div class="card">
                 <button class="fav-btn ${isFav ? 'active' : ''}" onclick="toggleFavorito(event, '${emp.id}')">★</button>
                 <div onclick="abrirModal('${emp.id}')">
-                    <img src="${emp.logo}" class="logo-card" onerror="this.src='https://img.icons8.com/fluency/150/group-of-companies.png'">
+                    <img src="${imgPath}" class="logo-card" onerror="this.src='https://img.icons8.com/fluency/150/group-of-companies.png'">
                     <h3>${emp.nome}</h3>
                     <p><strong>${emp.categoria}</strong></p>
                 </div>
@@ -73,8 +75,6 @@ function abrirModal(id) {
     const e = empresas.find(i => i.id == id);
     if (!e) return;
     const botaoSite = e.site ? `<a href="${e.site}" target="_blank" class="link-site">Visitar Website</a>` : '';
-    
-    // WHATSAPP CENTRALIZADO PARA VOCÊ (MÁRCIO)
     const zapGeral = "94992500073";
 
     document.getElementById('conteudoEmpresa').innerHTML = `

@@ -1,9 +1,9 @@
 /* PROJETO: CDA LISTA 
    DESENVOLVEDOR: Márcio Oliveira (RAZGO)
-   CONFIGURAÇÃO: 6 Colunas PC | Modal de Detalhes | Mobile First
+   ESTILO: Clean, Profissional e Focado em Conversão
 */
 
-/* --- RESET E BASES --- */
+/* --- 1. RESET E VARIÁVEIS --- */
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +12,7 @@
 }
 
 body {
-    background-color: #f8fafc;
+    background-color: #f8fafc; /* Fundo levemente cinza para destacar os cards brancos */
     color: #1e293b;
     line-height: 1.6;
 }
@@ -20,62 +20,95 @@ body {
 .container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 20px;
 }
 
-/* --- CABEÇALHO --- */
+/* --- 2. CABEÇALHO (AZUL) --- */
 header {
-    background: #1e40af;
+    background: #1e40af; /* Azul Royal Profissional */
     color: white;
     text-align: center;
-    padding: 40px 0 60px;
+    padding: 40px 0 40px; /* Padding ajustado para acomodar a busca */
     position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .logo-cabecalho {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    border: 3px solid white;
-    margin-bottom: 10px;
+    border: 3px solid rgba(255,255,255,0.8);
+    margin-bottom: 12px;
     object-fit: cover;
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+header p {
+    font-size: 1rem;
+    margin-bottom: 25px;
+    opacity: 0.9;
 }
 
 .btn-menu-mobile {
     position: absolute;
     left: 20px;
     top: 20px;
-    background: rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
     border: none;
     color: white;
     font-size: 1.5rem;
-    padding: 5px 12px;
+    padding: 8px 12px;
     border-radius: 8px;
     cursor: pointer;
+    transition: 0.3s;
 }
 
-/* --- BUSCA --- */
+.btn-menu-mobile:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+/* --- 3. BARRA DE BUSCA (DENTRO DO HEADER) --- */
 .busca-wrapper {
-    margin: -30px auto 30px;
-    max-width: 600px;
-    padding: 0 15px;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.busca-container {
+    background: white;
+    display: flex;
+    align-items: center;
+    padding: 2px 20px;
+    border-radius: 10px; /* Bordas levemente arredondadas (mais sério) */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.icone-busca {
+    font-size: 1.2rem;
+    margin-right: 12px;
+    color: #94a3b8;
 }
 
 #inputBusca {
     width: 100%;
-    padding: 15px 25px;
-    border-radius: 30px;
     border: none;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    font-size: 1rem;
+    padding: 14px 0;
+    font-size: 1.05rem;
     outline: none;
+    color: #1e293b;
+    background: transparent;
 }
 
-/* --- CATEGORIAS (PC) --- */
+/* --- 4. CATEGORIAS (PC) --- */
 .categorias-pc {
     display: none;
     text-align: center;
-    margin-bottom: 30px;
+    margin: 30px 0;
 }
 
 @media (min-width: 768px) {
@@ -85,170 +118,166 @@ header {
 .tab-btn {
     background: white;
     border: 1px solid #e2e8f0;
-    padding: 8px 18px;
-    border-radius: 20px;
+    padding: 10px 22px;
+    border-radius: 30px;
     margin: 5px;
     cursor: pointer;
+    font-weight: 500;
+    color: #475569;
     transition: 0.3s;
 }
 
 .tab-btn.active, .tab-btn:hover {
     background: #1e40af;
     color: white;
+    border-color: #1e40af;
 }
 
-/* --- GRID DE EMPRESAS (6 COLUNAS NO PC) --- */
+/* --- 5. GRID DE 6 COLUNAS NO PC --- */
 .grid-container {
     display: grid;
     gap: 15px;
-    padding-bottom: 50px;
-    /* Mobile: 2 colunas */
-    grid-template-columns: repeat(2, 1fr);
+    padding: 20px 0 60px;
+    grid-template-columns: repeat(2, 1fr); /* 2 Colunas no Mobile */
 }
 
 @media (min-width: 768px) {
-    /* Tablet: 3 colunas */
     .grid-container { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (min-width: 1200px) {
-    /* PC: 6 colunas conforme solicitado */
-    .grid-container { grid-template-columns: repeat(6, 1fr); }
+    .grid-container { grid-template-columns: repeat(6, 1fr); } /* 6 Colunas no PC */
 }
 
-/* --- CARDS --- */
+/* --- 6. CARDS DE EMPRESAS --- */
 .card-empresa {
     background: white;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
     border: 1px solid #f1f5f9;
 }
 
 .card-empresa:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .card-img-container img {
     width: 100%;
-    height: 110px;
+    height: 120px;
     object-fit: cover;
+    background-color: #f1f5f9;
 }
 
 .card-info {
-    padding: 10px;
+    padding: 15px;
     text-align: center;
     flex-grow: 1;
 }
 
 .card-info h3 {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #1e3a8a;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Mantém alinhado mesmo com nomes longos */
+    text-overflow: ellipsis;
 }
 
 .categoria-label {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     color: #64748b;
     background: #f1f5f9;
-    padding: 2px 8px;
-    border-radius: 10px;
+    padding: 3px 12px;
+    border-radius: 20px;
 }
 
 .btn-ver-mais {
     background: #eff6ff;
     color: #1e40af;
     border: none;
-    padding: 6px;
+    padding: 8px;
     width: 100%;
-    margin-top: 10px;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    font-weight: bold;
+    margin-top: 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
 }
 
-/* --- MODAIS (POPUP ANÚNCIO E DETALHES) --- */
+/* --- 7. MODAIS (ANÚNCIO E DETALHES) --- */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.85);
     display: none;
     justify-content: center;
     align-items: center;
-    z-index: 2000;
+    z-index: 3000;
     padding: 20px;
 }
 
 .modal-box {
     background: white;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 450px;
-    position: relative;
     padding: 30px;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+    border-radius: 16px;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
 }
 
 .btn-fechar {
     position: absolute;
-    top: 15px; right: 15px;
-    font-size: 1.5rem;
+    top: 15px; right: 20px;
+    font-size: 1.8rem;
     cursor: pointer;
-    color: #64748b;
+    color: #94a3b8;
 }
 
-/* Estilo específico para o botão de WhatsApp dentro do Modal */
 .btn-zap {
     display: block;
     background: #25d366;
     color: white;
     text-align: center;
-    padding: 12px;
-    border-radius: 8px;
+    padding: 16px;
+    border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 25px;
+    transition: 0.3s;
 }
 
-/* --- MENU LATERAL --- */
+.btn-zap:hover { background: #1eb956; }
+
+/* --- 8. MENU LATERAL --- */
 .side-menu {
     position: fixed;
     top: 0; left: -280px; width: 280px; height: 100%;
     background: white;
-    z-index: 1500;
-    transition: 0.3s;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    z-index: 4000;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 5px 0 20px rgba(0,0,0,0.1);
 }
 
 .side-menu-header {
     background: #1e40af;
     color: white;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
+    padding: 25px 20px;
 }
 
 .menu-btn {
     width: 100%;
     text-align: left;
-    padding: 15px 20px;
-    border: none;
+    padding: 16px 20px;
     background: none;
+    border: none;
     border-bottom: 1px solid #f1f5f9;
-    font-size: 1rem;
+    font-size: 1.05rem;
     cursor: pointer;
 }
 
@@ -257,27 +286,61 @@ header {
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.5);
     display: none;
-    z-index: 1400;
+    z-index: 3500;
 }
 
-/* --- FOOTER --- */
+/* --- 9. RODAPÉ (PERSONALIZADO) --- */
 footer {
-    background: #0f172a;
-    color: #94a3b8;
-    padding: 40px 0;
+    background: white;
+    padding: 50px 0 30px;
+    margin-top: 60px;
     text-align: center;
-    margin-top: 50px;
+    border-top: 1px solid #e2e8f0;
 }
 
-.txt-verde-zap { color: #25d366; font-weight: bold; }
-.linha-divisoria { border: 0; border-top: 1px solid #1e293b; margin: 20px 0; }
-.creditos a { color: white; text-decoration: none; }
+.footer-brand {
+    font-size: 1.15rem;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
 
-/* --- BOTÃO FLUTUANTE --- */
+.footer-info {
+    font-size: 1.05rem;
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+.footer-copyright {
+    font-size: 0.95rem;
+    color: #94a3b8;
+}
+
+.footer-divider {
+    max-width: 150px;
+    margin: 25px auto;
+    border: 0;
+    border-top: 1.5px solid #cbd5e1;
+}
+
+.footer-dev {
+    font-size: 0.95rem;
+    color: #64748b;
+}
+
+.footer-dev a {
+    color: #1e40af;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* --- 10. BOTÃO FLUTUANTE --- */
 .btn-zap-flutuante {
     position: fixed;
-    bottom: 20px; right: 20px;
+    bottom: 25px; right: 25px;
     width: 60px; height: 60px;
-    z-index: 1000;
+    z-index: 2000;
+    filter: drop-shadow(0 4px 8px rgba(37, 211, 102, 0.3));
+    transition: 0.3s;
 }
-.btn-zap-flutuante img { width: 100%; }
+
+.btn-zap-flutuante:hover { transform: scale(1.1); }

@@ -1,61 +1,261 @@
-/* --- CONFIGURAÇÕES GERAIS --- */
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-body { background: #f4f4f4; overflow-x: hidden; }
+/* PROJETO: CDA LISTA 
+   DESENVOLVEDOR: Márcio Oliveira (RAZGO)
+   ESTILO: Responsivo (Desktop Centralizado / Mobile Side-Menu)
+*/
 
-/* --- CABEÇALHO --- */
-header { background: #fff; text-align: center; padding: 20px; border-bottom: 1px solid #ddd; }
-.logo-cabecalho { 
-    width: 120px !important; /* TAMANHO FIXO DA LOGO */
-    height: auto; 
-    margin-bottom: 10px; 
+/* --- 1. CONFIGURAÇÕES GERAIS --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
-/* --- BUSCA --- */
+body {
+    background-color: #f4f7f6;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* --- 2. CABEÇALHO E LOGO --- */
+header {
+    background: #ffffff;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    border-bottom: 1px solid #eee;
+}
+
+.logo-cabecalho {
+    max-width: 150px; /* Trava o tamanho da logo */
+    height: auto;
+    display: block;
+    margin: 0 auto 10px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: #1e40af;
+    margin-bottom: 5px;
+}
+
+/* --- 3. MENU DE CATEGORIAS: VERSÃO PC (DESKTOP) --- */
+#sideMenu {
+    background: #fff;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+.side-menu-header {
+    display: none; /* Esconde o título/fechar do menu no PC */
+}
+
+.side-menu-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 15px 0;
+    flex-wrap: wrap;
+}
+
+.menu-btn {
+    padding: 8px 18px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.menu-btn:hover {
+    background: #1e40af;
+    color: white;
+    border-color: #1e40af;
+}
+
+/* Esconde o botão hambúrguer no PC */
+.btn-menu-app {
+    display: none;
+}
+
+/* --- 4. BUSCA --- */
+.busca-wrapper {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
 .busca-container {
-    background: #eee; padding: 10px; border-radius: 25px;
-    max-width: 500px; margin: 15px auto; display: flex; align-items: center;
+    background: #fff;
+    padding: 12px 20px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
-#inputBusca { border: none; background: transparent; width: 100%; outline: none; padding-left: 10px; }
 
-/* --- GRID DE 4 COLUNAS --- */
+#inputBusca {
+    border: none;
+    outline: none;
+    width: 100%;
+    margin-left: 10px;
+    font-size: 1rem;
+}
+
+/* --- 5. GRID DE 4 COLUNAS --- */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 POR LINHA */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    padding: 20px;
-    max-width: 1200px;
+    padding: 20px 10%;
+    max-width: 1300px;
     margin: 0 auto;
 }
 
-/* --- CARDS --- */
-.card-empresa { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; }
-.card-img-container img { width: 100%; height: 150px; object-fit: cover; }
-.card-info { padding: 10px; text-align: center; }
+.card-empresa {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+    cursor: pointer;
+}
 
-/* --- BOTÃO WHATSAPP FLUTUANTE (CORREÇÃO DA IMAGEM GIGANTE) --- */
+.card-empresa:hover {
+    transform: translateY(-5px);
+}
+
+.card-img-container img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.card-info {
+    padding: 15px;
+    text-align: center;
+}
+
+/* --- 6. BOTÃO WHATSAPP FLUTUANTE (CORRIGIDO) --- */
 .btn-zap-flutuante {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 60px; /* TRAVA O TAMANHO DO BOTÃO */
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
     height: 60px;
-    z-index: 9999;
+    z-index: 999;
 }
+
 .btn-zap-flutuante img {
-    width: 100%; /* A imagem preenche apenas os 60px do link */
+    width: 100%;
     height: 100%;
 }
 
-/* --- POPUP DE ANÚNCIO (CORREÇÃO) --- */
-.modal-overlay { 
-    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-    background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; 
-}
-.modal-content { 
-    background: white; padding: 20px; border-radius: 10px; 
-    width: 90%; max-width: 400px; text-align: center; position: relative;
+/* --- 7. MODAL --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
 }
 
-/* --- RESPONSIVIDADE --- */
-@media (max-width: 1000px) { .grid-container { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 500px) { .grid-container { grid-template-columns: 1fr; } }
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+.modal-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+/* --- 8. RESPONSIVIDADE: VERSÃO MOBILE (CELULAR) --- */
+@media (max-width: 768px) {
+    /* Menu Lateral */
+    #sideMenu {
+        position: fixed;
+        top: 0;
+        left: -280px; /* Escondido */
+        width: 280px;
+        height: 100%;
+        z-index: 3000;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+        transition: 0.4s ease;
+        padding: 20px;
+        display: block;
+    }
+
+    .side-menu-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 25px;
+    }
+
+    .side-menu-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0;
+        gap: 10px;
+    }
+
+    .menu-btn {
+        width: 100%;
+        border: none;
+        background: #f8f9fa;
+        justify-content: flex-start;
+        border-radius: 8px;
+    }
+
+    /* Mostra o botão hambúrguer no Mobile */
+    .btn-menu-app {
+        display: block;
+        position: absolute;
+        left: 20px;
+        top: 25px;
+        font-size: 24px;
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* Ajuste Grid para Mobile */
+    .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 15px;
+    }
+
+    .logo-cabecalho {
+        max-width: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.overlay-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 2500;
+}

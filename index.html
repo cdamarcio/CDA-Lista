@@ -7,83 +7,58 @@
     
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="style.css">
-    
-    <style>
-        /* AJUSTE DIRETO PARA 4 COLUNAS E LOGO */
-        .logo-cabecalho {
-            max-width: 150px; /* Impede a logo de ficar gigante */
-            height: auto;
-            display: block;
-            margin: 0 auto 10px;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* FIXO EM 4 COLUNAS */
-            gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* Responsividade para não quebrar no celular */
-        @media (max-width: 1024px) {
-            .grid-container { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (max-width: 480px) {
-            .grid-container { grid-template-columns: 1fr; }
-        }
-    </style>
 </head>
 <body>
 
-    <div id="popupAnuncio" class="modal-overlay" style="display: flex;">
-        <div class="modal-box popup-promocao">
+    <div id="popupAnuncio" class="modal-overlay">
+        <div class="modal-content popup-promocao">
             <span class="btn-fechar" onclick="fecharPopup()">
                 <span id="contador">30</span>s &times;
             </span>
             <div class="popup-conteudo">
                 <h2 style="color: #1e40af; margin-bottom: 15px;">🚀 Destaque sua Empresa!</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 20px; line-height: 1.4;">
-                    Faça já a propaganda da sua empresa por apenas <br>
-                    <strong style="color: #25d366; font-size: 2rem;">R$ 69,99 por mês</strong>
+                <p style="font-size: 1.2rem; margin-bottom: 20px;">
+                    Anuncie no CDA LISTA por apenas <br>
+                    <strong style="color: #25d366; font-size: 1.8rem;">R$ 69,99 / mês</strong>
                 </p>
-                <a href="https://wa.me/5562996466033?text=Olá! Quero anunciar no CDA LISTA." 
-                   target="_blank" class="link-whatsapp pulse-mini">
+                <a href="https://wa.me/5562996466033" target="_blank" class="btn-zap" style="text-decoration: none; display: block; background: #25d366; color: white; padding: 12px; border-radius: 8px; font-weight: bold;">
                     Quero Anunciar Agora!
                 </a>
             </div>
         </div>
     </div>
 
-    <div id="sideMenu" class="side-menu">
-        <div class="side-menu-header">
-            <h3>Categorias</h3>
-            <span class="btn-fechar-menu" onclick="toggleMenu()">&times;</span>
-        </div>
-        <nav class="side-menu-nav">
-            <div id="menuCategorias">
-                <button class="menu-btn" onclick="filtrarPorCategoria('Todas')">🏠 Todas</button>
-                <button class="menu-btn" onclick="filtrarPorCategoria('Jurídico')">⚖️ Jurídico</button>
-                <button class="menu-btn" onclick="filtrarPorCategoria('Tecnologia')">💻 Tecnologia</button>
-                <button class="menu-btn" onclick="filtrarPorCategoria('Engenharia')">🏗️ Engenharia</button>
-                <button class="menu-btn" onclick="filtrarPorCategoria('Restaurantes')">🍽️ Restaurantes</button>
-            </div>
-        </nav>
-    </div>
     <div id="overlayMenu" class="overlay-menu" onclick="toggleMenu()"></div>
 
     <header>
         <button class="btn-menu-app" onclick="toggleMenu()">&#9776;</button>
+        
         <img src="img/logo-cda3.jpg" alt="CDA Lista" class="logo-cabecalho">
         <h1>CDA LISTA</h1>
-        <div class="busca-wrapper">
-            <div class="busca-container">
-                <span class="icone-busca">🔍</span>
-                <input type="text" id="inputBusca" placeholder="O que você procura em CDA?" onkeyup="filtrar()">
-            </div>
-        </div>
+        <p style="opacity: 0.7; font-size: 0.9rem;">O Guia Comercial de Conceição do Araguaia</p>
     </header>
+
+    <div id="sideMenu">
+        <div class="side-menu-header">
+            <h3>Categorias</h3>
+            <span class="btn-fechar-menu" onclick="toggleMenu()" style="cursor: pointer; font-size: 24px;">&times;</span>
+        </div>
+        <nav class="side-menu-nav" id="menuCategorias">
+            <button class="menu-btn" onclick="filtrarPorCategoria('Todas')">🏠 Todas</button>
+            <button class="menu-btn" onclick="filtrarPorCategoria('Jurídico')">⚖️ Jurídico</button>
+            <button class="menu-btn" onclick="filtrarPorCategoria('Tecnologia')">💻 Tecnologia</button>
+            <button class="menu-btn" onclick="filtrarPorCategoria('Engenharia')">🏗️ Engenharia</button>
+            <button class="menu-btn" onclick="filtrarPorCategoria('Restaurantes')">🍽️ Restaurantes</button>
+            <button class="menu-btn" onclick="filtrarPorCategoria('Saúde')">🏥 Saúde</button>
+        </nav>
+    </div>
+
+    <div class="busca-wrapper">
+        <div class="busca-container">
+            <span style="font-size: 1.2rem;">🔍</span>
+            <input type="text" id="inputBusca" placeholder="O que você procura em CDA?" onkeyup="filtrar()">
+        </div>
+    </div>
 
     <main class="container">
         <div id="listaPrincipal" class="grid-container">
@@ -92,16 +67,26 @@
 
     <div id="modalDados" class="modal-overlay" onclick="fecharJanelaDados()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="btn-fechar" onclick="fecharJanelaDados()">&times;</span>
+            <span onclick="fecharJanelaDados()" style="position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer;">&times;</span>
+            
             <img id="mLogo" class="modal-logo" src="" alt="Logo Empresa">
+            
             <div class="modal-info">
-                <h2 id="mNome">Nome da Empresa</h2>
+                <h2 id="mNome" style="color: #1e40af; margin-bottom: 10px;">Nome da Empresa</h2>
                 <p><strong>📍 Endereço:</strong> <span id="mEndereco">...</span></p>
                 <p><strong>📱 WhatsApp:</strong> <span id="mZapText">...</span></p>
-                <p id="mSiteArea"><strong>🌐 Site:</strong> <span id="mSiteText">...</span></p>
+                
+                <div id="mSiteArea" style="margin-top: 10px; display: none;">
+                    <p><strong>🌐 Site:</strong> <span id="mSiteText">...</span></p>
+                </div>
+                
                 <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
-                    <a id="mZapLink" href="" target="_blank" class="btn-zap">Falar no Zap</a>
-                    <a id="mSiteLink" href="" target="_blank" class="btn-site-modal" style="background: #004a8d; color: white; text-decoration: none; padding: 12px; border-radius: 8px; display: none;">Acessar Site</a>
+                    <a id="mZapLink" href="" target="_blank" class="btn-zap" style="text-decoration: none; text-align: center; background: #25d366; color: white; padding: 12px; border-radius: 8px; font-weight: bold;">
+                        Falar no WhatsApp
+                    </a>
+                    <a id="mSiteLink" href="" target="_blank" class="btn-site-modal" style="text-decoration: none; text-align: center; background: #1e40af; color: white; padding: 12px; border-radius: 8px; display: none;">
+                        Acessar Site
+                    </a>
                 </div>
             </div>
         </div>
@@ -112,10 +97,10 @@
     </a>
 
     <footer>
-        <div class="container footer-content">
-            <p><strong>CDA Lista</strong> - Conectando o comércio local</p>
-            <p>© 2026 Todos os direitos reservados</p>
-            <p>Desenvolvido por <a href="https://razgo.com.br" target="_blank">RAZGO</a></p>
+        <div style="text-align: center; padding: 40px 20px; background: #fff; border-top: 1px solid #eee; margin-top: 40px;">
+            <p><strong>CDA LISTA</strong> - Guia Comercial de Conceição do Araguaia</p>
+            <p style="font-size: 0.8rem; opacity: 0.6; margin: 5px 0;">© 2026 Todos os direitos reservados</p>
+            <p style="margin-top: 10px;">Desenvolvido por <a href="https://razgo.com.br" target="_blank" style="color: #1e40af; text-decoration: none; font-weight: bold;">RAZGO</a></p>
         </div>
     </footer>
 

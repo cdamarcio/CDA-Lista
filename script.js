@@ -1,15 +1,18 @@
 /* PROJETO: CDA LISTA 
    DESENVOLVEDOR: Márcio Oliveira (RAZGO)
-   FUNCIONALIDADE: Grid de 6 colunas, Busca e Janela de Dados (Modal)
+   FUNCIONALIDADE: Grid de 4 colunas, Busca, Menu Dinâmico e Modal
 */
 
-// --- BANCO DE DADOS COMPLETO (CDA LISTA) ---
+// --- 1. BANCO DE DADOS COMPLETO (CDA LISTA) ---
 let empresas = [
-    // --- SUAS EMPRESAS (RAZGO & GRUPO) ---
+    // --- SEU GRUPO (RAZGO & AFILIADAS) ---
     { id: 1, nome: "RAZGO", categoria: "Tecnologia", zap: "94992500073", endereco: "Conceição do Araguaia - PA", site: "razgo.com.br", img: "img/logo-cda3.jpg" },
     { id: 2, nome: "KM Projetos & Engenharia", categoria: "Engenharia", zap: "94992500073", endereco: "Conceição do Araguaia - PA", site: "kmprojetos.com.br", img: "img/logo-cda3.jpg" },
     { id: 3, nome: "MAZZ", categoria: "Educação", zap: "94992500073", endereco: "Conceição do Araguaia - PA", site: "", img: "img/logo-cda3.jpg" },
     { id: 4, nome: "MR Treinamentos", categoria: "Segurança do Trabalho", zap: "94992500073", endereco: "Conceição do Araguaia - PA", site: "", img: "img/logo-cda3.jpg" },
+
+    // --- JURÍDICO ---
+    { id: 25, nome: "J. Carlos Advogados", categoria: "Jurídico", zap: "94999999999", endereco: "Conceição do Araguaia - PA", site: "drjosecarlos.adv.br", img: "https://via.placeholder.com/150" },
 
     // --- GASTRONOMIA & LAZER ---
     { id: 5, nome: "Restaurante Zé Piranha", categoria: "Restaurantes", zap: "94999999999", endereco: "Porto das Balsas - Orla", site: "", img: "https://via.placeholder.com/150" },
@@ -40,57 +43,24 @@ let empresas = [
     { id: 22, nome: "JamJoy Transportes", categoria: "Transporte", zap: "94999999999", endereco: "Rodoviária", site: "jamjoy.com.br", img: "https://via.placeholder.com/150" },
     { id: 23, nome: "Sicredi CDA", categoria: "Financeiro", zap: "94999999999", endereco: "Av. Araguaia", site: "sicredi.com.br", img: "https://via.placeholder.com/150" },
     { id: 24, nome: "Equatorial Energia", categoria: "Serviços Públicos", zap: "94999999999", endereco: "Escritório Local", site: "equatorialenergia.com.br", img: "https://via.placeholder.com/150" }
-    
-    // --- SERVIÇOS JURÍDICOS ---
-    { 
-        id: 25, 
-        nome: "J. Carlos Advogados", 
-        categoria: "Jurídico", 
-        zap: "94984339662", // Sugestão: Atualizar com o zap real do Dr. José Carlos
-        endereco: "Conceição do Araguaia - PA", 
-        site: "drjosecarlos.adv.br", 
-        img: "https://via.placeholder.com/150" // Ou o logo oficial se você já tiver
-    },
-
-    // Continue adicionando conforme o padrão para completar as 50...
 ];
 
-let tempoRestante = 20;
+let tempoRestante = 30;
 let intervaloPopup;
 
 // --- 2. INICIALIZAÇÃO ---
 window.onload = () => {
-    // 1. Ordenar de A a Z por padrão
+    // Ordenar de A a Z
     const listaOrdenada = [...empresas].sort((a, b) => a.nome.localeCompare(b.nome));
     renderizarGrid(listaOrdenada);
     
-    // 2. GERAR O MENU DE CATEGORIAS DINAMICAMENTE (Insira aqui)
+    // Gerar Menu Dinâmico baseado nas categorias das empresas cadastradas
     gerarMenuCategorias();
-
+    
     iniciarContadorPopup();
 };
 
-// --- NOVA FUNÇÃO PARA O MENU ---
-function gerarMenuCategorias() {
-    const menuContainer = document.getElementById('sideMenu'); // Ajuste conforme seu HTML
-    if (!menuContainer) return;
-
-    // Extrai categorias únicas
-    const categorias = ['Todas', ...new Set(empresas.map(e => e.categoria))];
-
-    // Limpa o menu (mantendo apenas o botão de fechar se houver)
-    // Aqui você pode injetar os botões de filtro:
-    const htmlBotoes = categorias.map(cat => `
-        <button onclick="filtrarPorCategoria('${cat}')" class="btn-menu">
-            ${cat}
-        </button>
-    `).join('');
-
-    // Insere no menu (exemplo simplificado, ajuste as classes CSS)
-    menuContainer.innerHTML += htmlBotoes; 
-}
-
-// --- 3. RENDERIZAÇÃO DO GRID (CADASTRO LIMPO) ---
+// --- 3. RENDERIZAÇÃO DO GRID ---
 function renderizarGrid(lista) {
     const container = document.getElementById('listaPrincipal');
     if (!container) return;
@@ -99,8 +69,6 @@ function renderizarGrid(lista) {
     lista.forEach(empresa => {
         const card = document.createElement('div');
         card.className = 'card-empresa';
-        
-        // O CLIQUE NO QUADRO INTEIRO ABRE A JANELA
         card.onclick = () => abrirJanelaDados(empresa.id);
         
         card.innerHTML = `
@@ -116,24 +84,37 @@ function renderizarGrid(lista) {
     });
 }
 
-// --- 4. JANELA DE DADOS (MODAL) ---
+// --- 4. GERADOR DE MENU DINÂMICO ---
+function gerarMenuCategorias() {
+    const menuCategorias = document.getElementById('menuCategorias');
+    if (!menuCategorias) return;
+
+    // Obtém categorias únicas e ordena alfabeticamente
+    const categorias = ['Todas', ...new Set(empresas.map(e => e.categoria))].sort();
+
+    menuCategorias.innerHTML = categorias.map(cat => `
+        <button onclick="filtrarPorCategoria('${cat}')" class="item-menu">
+            ${cat}
+        </button>
+    `).join('');
+}
+
+// --- 5. JANELA DE DADOS (MODAL) ---
 function abrirJanelaDados(id) {
     const empresa = empresas.find(e => e.id === id);
     const modal = document.getElementById('modalDados');
     
-    // Preenche a Logo no Topo Centralizada
+    // Preenchimento do Modal
     document.getElementById('mLogo').src = empresa.img;
-    
-    // Preenche os Textos
     document.getElementById('mNome').innerText = empresa.nome;
     document.getElementById('mEndereco').innerText = empresa.endereco || "Conceição do Araguaia - PA";
     document.getElementById('mZapText').innerText = empresa.zap;
 
-    // Configura o link do Zap (remove caracteres especiais para o link)
+    // Link do WhatsApp (limpeza de caracteres)
     const numeroLimpo = empresa.zap.replace(/\D/g, '');
     document.getElementById('mZapLink').href = `https://wa.me/55${numeroLimpo}`;
 
-    // Configura o Site (mostra apenas se houver)
+    // Lógica do Site
     const areaSite = document.getElementById('mSiteArea');
     const linkSite = document.getElementById('mSiteLink');
     if (empresa.site) {
@@ -153,27 +134,28 @@ function fecharJanelaDados() {
     document.getElementById('modalDados').style.display = 'none';
 }
 
-// --- 5. BUSCA E FILTROS ---
+// --- 6. BUSCA E FILTROS ---
 function filtrar() {
     const termo = document.getElementById('inputBusca').value.toLowerCase();
     const filtrados = empresas.filter(e => 
         e.nome.toLowerCase().includes(termo) || 
         e.categoria.toLowerCase().includes(termo)
     );
-    renderizarGrid(filtrados);
+    // Mantém a ordem alfabética na busca
+    renderizarGrid(filtrados.sort((a, b) => a.nome.localeCompare(b.nome)));
 }
 
 function filtrarPorCategoria(cat) {
     if (cat === 'Todas') {
-        renderizarGrid(empresas);
+        renderizarGrid([...empresas].sort((a, b) => a.nome.localeCompare(b.nome)));
     } else {
         const filtrados = empresas.filter(e => e.categoria === cat);
-        renderizarGrid(filtrados);
+        renderizarGrid(filtrados.sort((a, b) => a.nome.localeCompare(b.nome)));
     }
-    toggleMenu(); // Fecha o menu lateral após escolher
+    toggleMenu(); // Fecha o menu lateral no mobile
 }
 
-// --- 6. UTILITÁRIOS (POPUP E MENU) ---
+// --- 7. UTILITÁRIOS ---
 function iniciarContadorPopup() {
     const contador = document.getElementById('contador');
     intervaloPopup = setInterval(() => {
@@ -184,18 +166,20 @@ function iniciarContadorPopup() {
 }
 
 function fecharPopup() {
-    document.getElementById('popupAnuncio').style.display = 'none';
+    const popup = document.getElementById('popupAnuncio');
+    if(popup) popup.style.display = 'none';
     clearInterval(intervaloPopup);
 }
 
 function toggleMenu() {
     const menu = document.getElementById('sideMenu');
     const overlay = document.getElementById('overlayMenu');
+    
     if (menu.style.left === '0px') {
         menu.style.left = '-280px';
-        overlay.style.display = 'none';
+        if(overlay) overlay.style.display = 'none';
     } else {
         menu.style.left = '0px';
-        overlay.style.display = 'block';
+        if(overlay) overlay.style.display = 'block';
     }
 }

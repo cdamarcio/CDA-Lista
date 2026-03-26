@@ -41,19 +41,54 @@ let empresas = [
     { id: 23, nome: "Sicredi CDA", categoria: "Financeiro", zap: "94999999999", endereco: "Av. Araguaia", site: "sicredi.com.br", img: "https://via.placeholder.com/150" },
     { id: 24, nome: "Equatorial Energia", categoria: "Serviços Públicos", zap: "94999999999", endereco: "Escritório Local", site: "equatorialenergia.com.br", img: "https://via.placeholder.com/150" }
     
+    // --- SERVIÇOS JURÍDICOS ---
+    { 
+        id: 25, 
+        nome: "J. Carlos Advogados", 
+        categoria: "Jurídico", 
+        zap: "94984339662", // Sugestão: Atualizar com o zap real do Dr. José Carlos
+        endereco: "Conceição do Araguaia - PA", 
+        site: "drjosecarlos.adv.br", 
+        img: "https://via.placeholder.com/150" // Ou o logo oficial se você já tiver
+    },
+
     // Continue adicionando conforme o padrão para completar as 50...
 ];
 
-let tempoRestante = 30;
+let tempoRestante = 20;
 let intervaloPopup;
 
 // --- 2. INICIALIZAÇÃO ---
 window.onload = () => {
-    // Ordenar de A a Z por padrão
+    // 1. Ordenar de A a Z por padrão
     const listaOrdenada = [...empresas].sort((a, b) => a.nome.localeCompare(b.nome));
     renderizarGrid(listaOrdenada);
+    
+    // 2. GERAR O MENU DE CATEGORIAS DINAMICAMENTE (Insira aqui)
+    gerarMenuCategorias();
+
     iniciarContadorPopup();
 };
+
+// --- NOVA FUNÇÃO PARA O MENU ---
+function gerarMenuCategorias() {
+    const menuContainer = document.getElementById('sideMenu'); // Ajuste conforme seu HTML
+    if (!menuContainer) return;
+
+    // Extrai categorias únicas
+    const categorias = ['Todas', ...new Set(empresas.map(e => e.categoria))];
+
+    // Limpa o menu (mantendo apenas o botão de fechar se houver)
+    // Aqui você pode injetar os botões de filtro:
+    const htmlBotoes = categorias.map(cat => `
+        <button onclick="filtrarPorCategoria('${cat}')" class="btn-menu">
+            ${cat}
+        </button>
+    `).join('');
+
+    // Insere no menu (exemplo simplificado, ajuste as classes CSS)
+    menuContainer.innerHTML += htmlBotoes; 
+}
 
 // --- 3. RENDERIZAÇÃO DO GRID (CADASTRO LIMPO) ---
 function renderizarGrid(lista) {

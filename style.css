@@ -1,7 +1,6 @@
 /* PROJETO: CDA LISTA 
    DESENVOLVEDOR: Márcio Oliveira (RAZGO)
-   ESTILO: Responsivo (Desktop Centralizado / Mobile Side-Menu)
-   TEMA: Menu Black Premium & Grid 4 Colunas
+   TEMA: Full Black (Menu & Rodapé) + Grid 4 Colunas
 */
 
 /* --- 1. RESET E CONFIGURAÇÕES GERAIS --- */
@@ -17,9 +16,12 @@ body {
     color: #333;
     overflow-x: hidden;
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-/* --- 2. CABEÇALHO (LOGO CONTROLADA) --- */
+/* --- 2. CABEÇALHO --- */
 header {
     background: #ffffff;
     padding: 20px 0;
@@ -29,7 +31,7 @@ header {
 }
 
 .logo-cabecalho {
-    max-width: 150px; /* Impede a logo de ficar gigante */
+    max-width: 150px;
     height: auto;
     display: block;
     margin: 0 auto 10px;
@@ -37,13 +39,12 @@ header {
 
 header h1 {
     font-size: 1.8rem;
-    color: #1e40af; /* Azul RAZGO */
+    color: #1e40af;
     margin-bottom: 5px;
 }
 
-/* Botão Hambúrguer (Mobile) */
 .btn-menu-app {
-    display: none; /* Escondido no PC */
+    display: none;
     position: absolute;
     left: 20px;
     top: 30px;
@@ -54,16 +55,14 @@ header h1 {
     color: #333;
 }
 
-/* --- 3. MENU DE CATEGORIAS (PRETO PREMIUM) --- */
+/* --- 3. MENU DE CATEGORIAS (BLACK) --- */
 #sideMenu {
-    background: #000000; /* FUNDO PRETO */
+    background: #000000;
     width: 100%;
     z-index: 1100;
 }
 
-.side-menu-header {
-    display: none; /* Esconde título do menu no PC */
-}
+.side-menu-header { display: none; }
 
 .side-menu-nav {
     display: flex;
@@ -78,237 +77,97 @@ header h1 {
     padding: 10px 20px;
     border: 1px solid #333;
     background: #111;
-    color: #ffffff; /* Texto Branco */
+    color: #ffffff;
     border-radius: 25px;
     cursor: pointer;
     font-size: 0.9rem;
     transition: 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
 
 .menu-btn:hover {
     background: #1e40af;
-    color: #fff;
     border-color: #1e40af;
-    transform: translateY(-2px);
 }
 
-/* --- 4. BUSCA --- */
-.busca-wrapper {
-    padding: 25px 20px;
-    display: flex;
-    justify-content: center;
-}
-
+/* --- 4. BUSCA E GRID --- */
+.busca-wrapper { padding: 25px 20px; display: flex; justify-content: center; }
 .busca-container {
-    background: #fff;
-    padding: 12px 25px;
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 550px;
+    background: #fff; padding: 12px 25px; border-radius: 30px;
+    display: flex; align-items: center; width: 100%; max-width: 550px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
+#inputBusca { border: none; outline: none; width: 100%; margin-left: 12px; font-size: 1.1rem; }
 
-#inputBusca {
-    border: none;
-    outline: none;
-    width: 100%;
-    margin-left: 12px;
-    font-size: 1.1rem;
-    background: transparent;
-}
-
-/* --- 5. GRID DE 4 COLUNAS --- */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 EMPRESAS POR LINHA */
+    grid-template-columns: repeat(4, 1fr);
     gap: 25px;
     padding: 20px 10%;
     max-width: 1400px;
     margin: 0 auto;
+    flex: 1; /* Empurra o rodapé para o fim */
 }
 
 .card-empresa {
-    background: #ffffff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    transition: 0.3s ease;
-    cursor: pointer;
-    border: 1px solid #eee;
+    background: #ffffff; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: 0.3s ease;
+    cursor: pointer; border: 1px solid #eee;
 }
+.card-empresa:hover { transform: translateY(-8px); }
+.card-img-container img { width: 100%; height: 170px; object-fit: cover; }
+.card-info { padding: 15px; text-align: center; }
 
-.card-empresa:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.1);
-}
-
-.card-img-container img {
-    width: 100%;
-    height: 170px;
-    object-fit: cover;
-}
-
-.card-info {
-    padding: 15px;
+/* --- 5. RODAPÉ (BLACK PREMIUM) --- */
+footer {
+    background: #000000; /* FUNDO PRETO */
+    color: #ffffff;      /* TEXTO BRANCO */
+    padding: 40px 20px;
     text-align: center;
+    margin-top: 50px;
 }
 
-.card-info h3 {
-    font-size: 1.1rem;
-    color: #1e40af;
-    margin-bottom: 8px;
+.footer-content p {
+    margin-bottom: 10px;
+    opacity: 0.9;
 }
 
-.categoria-label {
-    font-size: 0.75rem;
-    background: #eff6ff;
-    color: #1e40af;
-    padding: 4px 12px;
-    border-radius: 15px;
+.footer-brand {
+    font-size: 1.2rem;
     font-weight: bold;
-    text-transform: uppercase;
+    color: #ffffff;
 }
 
-/* --- 6. BOTÃO WHATSAPP FLUTUANTE (TRAVADO EM 60PX) --- */
-.btn-zap-flutuante {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 65px;
-    height: 65px;
-    z-index: 1000;
-    transition: 0.3s;
-}
-
-.btn-zap-flutuante:hover {
-    transform: scale(1.1);
-}
-
-.btn-zap-flutuante img {
-    width: 100%;
-    height: 100%;
-}
-
-/* --- 7. MODAL (JANELA DE DADOS) --- */
-.modal-overlay {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    z-index: 2500;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background: #fff;
-    padding: 30px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 420px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-}
-
-.modal-logo {
-    width: 110px;
-    height: 110px;
-    object-fit: contain;
-    margin-bottom: 20px;
-    border-radius: 10px;
-}
-
-.btn-zap {
-    display: block;
-    background: #25d366;
-    color: #fff;
-    padding: 15px;
-    border-radius: 12px;
+.footer-dev a {
+    color: #3b82f6; /* Azul claro para link no fundo preto */
     text-decoration: none;
     font-weight: bold;
-    margin-top: 20px;
 }
 
-/* --- 8. RESPONSIVIDADE (MOBILE) --- */
-@media (max-width: 992px) {
-    .grid-container { grid-template-columns: repeat(3, 1fr); }
+.footer-divider {
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 20px auto;
+    max-width: 200px;
 }
 
+/* --- 6. BOTÃO WHATSAPP E MODAL --- */
+.btn-zap-flutuante { position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; z-index: 1000; }
+.btn-zap-flutuante img { width: 100%; height: 100%; }
+
+.modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85); z-index: 2500; justify-content: center; align-items: center;
+}
+.modal-content { background: #fff; padding: 30px; border-radius: 20px; width: 90%; max-width: 420px; text-align: center; position: relative; }
+.btn-zap { display: block; background: #25d366; color: #fff; padding: 15px; border-radius: 12px; text-decoration: none; font-weight: bold; margin-top: 20px; }
+
+/* --- 7. RESPONSIVIDADE --- */
 @media (max-width: 768px) {
-    /* Menu Lateral Mobile */
-    #sideMenu {
-        position: fixed;
-        top: 0;
-        left: -300px; /* Escondido */
-        width: 280px;
-        height: 100%;
-        box-shadow: 10px 0 20px rgba(0,0,0,0.3);
-        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        padding: 25px;
-        display: block;
-    }
-
-    .side-menu-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 30px;
-        color: #fff;
-    }
-
-    .btn-fechar-menu {
-        font-size: 30px;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    .side-menu-nav {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 0;
-        gap: 12px;
-    }
-
-    .menu-btn {
-        width: 100%;
-        border: none;
-        background: #1a1a1a;
-        justify-content: flex-start;
-        border-radius: 10px;
-    }
-
-    /* Hambúrguer */
-    .btn-menu-app {
-        display: block;
-    }
-
-    .grid-container {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 15px;
-        gap: 15px;
-    }
-
-    .logo-cabecalho {
-        max-width: 110px;
-    }
+    #sideMenu { position: fixed; top: 0; left: -300px; width: 280px; height: 100%; transition: 0.4s; padding: 25px; }
+    .side-menu-header { display: flex; justify-content: space-between; color: #fff; margin-bottom: 30px; }
+    .side-menu-nav { flex-direction: column; align-items: flex-start; padding: 0; }
+    .menu-btn { width: 100%; background: #1a1a1a; }
+    .btn-menu-app { display: block; }
+    .grid-container { grid-template-columns: repeat(2, 1fr); padding: 15px; }
 }
-
-@media (max-width: 480px) {
-    .grid-container {
-        grid-template-columns: 1fr;
-    }
-}
-
-.overlay-menu {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    z-index: 2000;
-}
+@media (max-width: 480px) { .grid-container { grid-template-columns: 1fr; } }

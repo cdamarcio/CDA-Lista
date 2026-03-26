@@ -4,44 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>CDA Lista | O Guia Comercial de Conceição do Araguaia - PA</title>
-    
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="popupAnuncio" class="modal-overlay">
-        <div class="modal-content popup-promocao">
-            <span class="btn-fechar" onclick="fecharPopup()">
-                <span id="contador">30</span>s &times;
-            </span>
-            <div class="popup-conteudo">
-                <h2 style="color: #1e40af; margin-bottom: 15px;">🚀 Destaque sua Empresa!</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 20px;">
-                    Anuncie no CDA LISTA por apenas <br>
-                    <strong style="color: #25d366; font-size: 1.8rem;">R$ 69,99 / mês</strong>
-                </p>
-                <a href="https://wa.me/5562996466033" target="_blank" class="btn-zap" style="text-decoration: none; display: block; background: #25d366; color: white; padding: 12px; border-radius: 8px; font-weight: bold;">
-                    Quero Anunciar Agora!
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div id="overlayMenu" class="overlay-menu" onclick="toggleMenu()"></div>
-
     <header>
         <button class="btn-menu-app" onclick="toggleMenu()">&#9776;</button>
-        
         <img src="img/logo-cda3.jpg" alt="CDA Lista" class="logo-cabecalho">
         <h1>CDA LISTA</h1>
-        <p style="opacity: 0.7; font-size: 0.9rem;">O Guia Comercial de Conceição do Araguaia</p>
     </header>
 
     <div id="sideMenu">
         <div class="side-menu-header">
             <h3>Categorias</h3>
-            <span class="btn-fechar-menu" onclick="toggleMenu()" style="cursor: pointer; font-size: 24px;">&times;</span>
+            <span class="btn-fechar-menu" onclick="toggleMenu()" style="cursor:pointer; font-size:30px;">&times;</span>
         </div>
         <nav class="side-menu-nav" id="menuCategorias">
             <button class="menu-btn" onclick="filtrarPorCategoria('Todas')">🏠 Todas</button>
@@ -49,46 +26,29 @@
             <button class="menu-btn" onclick="filtrarPorCategoria('Tecnologia')">💻 Tecnologia</button>
             <button class="menu-btn" onclick="filtrarPorCategoria('Engenharia')">🏗️ Engenharia</button>
             <button class="menu-btn" onclick="filtrarPorCategoria('Restaurantes')">🍽️ Restaurantes</button>
-            <button class="menu-btn" onclick="filtrarPorCategoria('Saúde')">🏥 Saúde</button>
         </nav>
     </div>
+    <div id="overlayMenu" class="overlay-menu" onclick="toggleMenu()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:1050;"></div>
 
     <div class="busca-wrapper">
         <div class="busca-container">
-            <span style="font-size: 1.2rem;">🔍</span>
+            <span>🔍</span>
             <input type="text" id="inputBusca" placeholder="O que você procura em CDA?" onkeyup="filtrar()">
         </div>
     </div>
 
-    <main class="container">
-        <div id="listaPrincipal" class="grid-container">
-            </div>
-    </main>
+    <main class="grid-container" id="listaPrincipal">
+        </main>
 
     <div id="modalDados" class="modal-overlay" onclick="fecharJanelaDados()">
         <div class="modal-content" onclick="event.stopPropagation()">
-            <span onclick="fecharJanelaDados()" style="position: absolute; top: 10px; right: 15px; font-size: 24px; cursor: pointer;">&times;</span>
-            
-            <img id="mLogo" class="modal-logo" src="" alt="Logo Empresa">
-            
-            <div class="modal-info">
-                <h2 id="mNome" style="color: #1e40af; margin-bottom: 10px;">Nome da Empresa</h2>
-                <p><strong>📍 Endereço:</strong> <span id="mEndereco">...</span></p>
-                <p><strong>📱 WhatsApp:</strong> <span id="mZapText">...</span></p>
-                
-                <div id="mSiteArea" style="margin-top: 10px; display: none;">
-                    <p><strong>🌐 Site:</strong> <span id="mSiteText">...</span></p>
-                </div>
-                
-                <div style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
-                    <a id="mZapLink" href="" target="_blank" class="btn-zap" style="text-decoration: none; text-align: center; background: #25d366; color: white; padding: 12px; border-radius: 8px; font-weight: bold;">
-                        Falar no WhatsApp
-                    </a>
-                    <a id="mSiteLink" href="" target="_blank" class="btn-site-modal" style="text-decoration: none; text-align: center; background: #1e40af; color: white; padding: 12px; border-radius: 8px; display: none;">
-                        Acessar Site
-                    </a>
-                </div>
-            </div>
+            <span onclick="fecharJanelaDados()" style="position:absolute; top:15px; right:20px; font-size:24px; cursor:pointer;">&times;</span>
+            <img id="mLogo" class="modal-logo" src="">
+            <h2 id="mNome" style="color:#1e40af;"></h2>
+            <p>📍 <span id="mEndereco"></span></p>
+            <p>📱 <span id="mZapText"></span></p>
+            <div id="mSiteArea">🌐 <span id="mSiteText"></span></div>
+            <a id="mZapLink" href="" target="_blank" class="btn-zap">Falar no WhatsApp</a>
         </div>
     </div>
 
@@ -97,10 +57,13 @@
     </a>
 
     <footer>
-        <div style="text-align: center; padding: 40px 20px; background: #fff; border-top: 1px solid #eee; margin-top: 40px;">
-            <p><strong>CDA LISTA</strong> - Guia Comercial de Conceição do Araguaia</p>
-            <p style="font-size: 0.8rem; opacity: 0.6; margin: 5px 0;">© 2026 Todos os direitos reservados</p>
-            <p style="margin-top: 10px;">Desenvolvido por <a href="https://razgo.com.br" target="_blank" style="color: #1e40af; text-decoration: none; font-weight: bold;">RAZGO</a></p>
+        <div class="footer-content">
+            <p class="footer-brand">CDA LISTA</p>
+            <p>Conectando o comércio local de Conceição do Araguaia - PA</p>
+            <p>(94) 99250-0073</p>
+            <hr class="footer-divider">
+            <p style="font-size: 0.8rem; opacity: 0.6;">© 2026 Todos os direitos reservados</p>
+            <p class="footer-dev">Desenvolvido por <a href="https://razgo.com.br" target="_blank">RAZGO</a></p>
         </div>
     </footer>
 

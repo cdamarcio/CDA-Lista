@@ -1,209 +1,39 @@
-/* PROJETO: CDA LISTA 
-   DESENVOLVEDOR: Márcio Oliveira (RAZGO)
-   ESTILO: Grid 4 Colunas, Ajuste de Logo e Responsividade
-*/
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 
-/* --- 1. RESET E CONFIGURAÇÕES GERAIS --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+header { background: #fff; padding: 20px; text-align: center; border-bottom: 2px solid #eee; }
 
-body {
-    background-color: #f0f2f5;
-    color: #333;
-    overflow-x: hidden;
-}
+/* FIXANDO TAMANHO DA LOGO DO CABEÇALHO */
+.logo-cabecalho { max-width: 140px; height: auto; margin-bottom: 10px; }
 
-/* --- 2. HEADER E LOGO (FIXANDO O TAMANHO) --- */
-header {
-    background: #ffffff;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 900;
-}
-
-.logo-cabecalho {
-    max-width: 180px; /* ISSO IMPEDE A LOGO DE FICAR IMENSA */
-    height: auto;
-    margin-bottom: 10px;
-}
-
-h1 {
-    font-size: 1.8rem;
-    color: #1e40af;
-    margin-bottom: 15px;
-}
-
-/* --- 3. BUSCA --- */
-.busca-wrapper {
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-}
-
-.busca-container {
-    background: #eee;
-    padding: 10px 20px;
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 500px;
-}
-
-#inputBusca {
-    border: none;
-    background: transparent;
-    outline: none;
-    margin-left: 10px;
-    width: 100%;
-    font-size: 1rem;
-}
-
-/* --- 4. GRID DE 4 COLUNAS --- */
+/* GRID DE 4 COLUNAS */
 .grid-container {
     display: grid;
-    /* Força 4 colunas em telas grandes */
-    grid-template-columns: repeat(4, 1fr); 
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    padding: 30px 10%;
-    max-width: 1300px;
+    padding: 20px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-/* --- 5. CARDS DAS EMPRESAS --- */
 .card-empresa {
-    background: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
-    cursor: pointer;
-    border: 1px solid #eee;
+    background: white; border-radius: 10px; overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); cursor: pointer;
 }
 
-.card-empresa:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
+.card-img-container img { width: 100%; height: 150px; object-fit: cover; }
 
-.card-img-container img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover; /* Mantém a proporção da imagem */
-}
+.card-info { padding: 15px; text-align: center; }
 
-.card-info {
-    padding: 15px;
-    text-align: center;
-}
-
-.card-info h3 {
-    font-size: 1.1rem;
-    color: #1e40af;
-    margin-bottom: 8px;
-}
-
-.categoria-label {
-    font-size: 0.7rem;
-    background: #dbeafe;
-    color: #1e40af;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-/* --- 6. MENU LATERAL E OVERLAY --- */
-.side-menu {
-    position: fixed;
-    top: 0;
-    left: -280px; /* Escondido */
-    width: 280px;
-    height: 100%;
-    background: #fff;
-    z-index: 1100;
-    transition: 0.4s ease;
-    padding: 20px;
-    box-shadow: 5px 0 15px rgba(0,0,0,0.1);
-}
-
-.overlay-menu {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5);
-    z-index: 1050;
-}
-
-/* --- 7. MODAL (JANELA DE DADOS) --- */
+/* MODAL OVERLAY */
 .modal-overlay {
-    display: none; /* JS controla isso */
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center;
 }
 
-.modal-content {
-    background: #fff;
-    padding: 25px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    position: relative;
-    animation: surgindo 0.3s ease;
-}
+.modal-content { background: white; padding: 25px; border-radius: 15px; width: 90%; max-width: 400px; text-align: center; position: relative; }
 
-@keyframes surgindo {
-    from { transform: scale(0.8); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-}
+.modal-logo { max-width: 120px; height: auto; margin-bottom: 15px; }
 
-.modal-logo {
-    width: 120px;
-    height: 120px;
-    object-fit: contain;
-    margin-bottom: 15px;
-    border-radius: 10px;
-}
-
-.btn-zap {
-    display: block;
-    background: #25d366;
-    color: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 15px;
-}
-
-/* --- 8. RESPONSIVIDADE (O SEGREDO DO LAYOUT) --- */
-
-/* Tablets - 3 Colunas */
-@media (max-width: 1024px) {
-    .grid-container { grid-template-columns: repeat(3, 1fr); padding: 20px 5%; }
-}
-
-/* Celulares Médios - 2 Colunas */
-@media (max-width: 768px) {
-    .grid-container { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-    .logo-cabecalho { max-width: 140px; }
-}
-
-/* Celulares Pequenos - 1 Coluna */
-@media (max-width: 480px) {
-    .grid-container { grid-template-columns: 1fr; }
-}
+/* RESPONSIVIDADE */
+@media (max-width: 1000px) { .grid-container { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .grid-container { grid-template-columns: 1fr; } }

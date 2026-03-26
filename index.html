@@ -6,29 +6,22 @@
     <title>CDA Lista | O Guia Comercial de Conceição do Araguaia - PA</title>
     
     <link rel="icon" type="image/png" href="img/favicon.png">
-    <link rel="apple-touch-icon" href="img/favicon.png">
-    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div id="popupAnuncio" class="modal-overlay" style="display: flex;">
-        <div class="modal-box popup-promocao">
+    <div id="popupAnuncio" class="modal-overlay">
+        <div class="modal-content popup-promocao">
             <span class="btn-fechar" onclick="fecharPopup()">
                 <span id="contador">30</span>s &times;
             </span>
             <div class="popup-conteudo">
                 <h2 style="color: #1e40af; margin-bottom: 15px;">🚀 Destaque sua Empresa!</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 20px; line-height: 1.4;">
-                    Faça já a propaganda da sua empresa por apenas <br>
-                    <strong style="color: #25d366; font-size: 2rem;">R$ 69,99 por mês</strong>
+                <p style="font-size: 1.2rem; margin-bottom: 20px;">
+                    Anuncie no CDA LISTA por apenas <br>
+                    <strong style="color: #25d366; font-size: 1.8rem;">R$ 69,99 / mês</strong>
                 </p>
-                <p style="margin-bottom: 25px; opacity: 0.8;">Apareça para toda Conceição do Araguaia e região!</p>
-                
-                <a href="https://wa.me/5562996466033?text=Olá! Quero fazer a propaganda da minha empresa no CDA LISTA." 
-                   target="_blank" class="link-whatsapp pulse-mini">
-                    Quero Anunciar Agora!
-                </a>
+                <a href="https://wa.me/5562996466033" target="_blank" class="btn-zap">Quero Anunciar Agora!</a>
             </div>
         </div>
     </div>
@@ -39,13 +32,11 @@
             <span class="btn-fechar-menu" onclick="toggleMenu()">&times;</span>
         </div>
         <nav class="side-menu-nav">
-            <div id="menuCategorias"></div>
             <button class="menu-btn" onclick="filtrarPorCategoria('Todas')">🏠 Todas</button>
-            <button class="menu-btn" onclick="filtrarPorCategoria('Praias & Lazer')">🏖️ Praias & Lazer</button>
-            <button class="menu-btn" onclick="filtrarPorCategoria('Hotéis & Pousadas')">🏨 Hotéis & Pousadas</button>
-            <button class="menu-btn" onclick="filtrarPorCategoria('Restaurantes')">🍽️ Restaurantes</button>
             <button class="menu-btn" onclick="filtrarPorCategoria('Tecnologia')">💻 Tecnologia</button>
             <button class="menu-btn" onclick="filtrarPorCategoria('Engenharia')">🏗️ Engenharia</button>
+            <button class="menu-btn" onclick="filtrarPorCategoria('Jurídico')">⚖️ Jurídico</button>
+            <button class="menu-btn" onclick="filtrarPorCategoria('Restaurantes')">🍽️ Restaurantes</button>
             <button class="menu-btn" onclick="filtrarPorCategoria('Saúde')">🏥 Saúde</button>
         </nav>
     </div>
@@ -54,14 +45,14 @@
     <header>
         <button class="btn-menu-app" onclick="toggleMenu()">&#9776;</button>
         
-        <img src="img/logo-cda3.jpg" alt="CDA Lista" class="logo-cabecalho" id="main-logo">
+        <img src="img/logo-cda3.jpg" alt="CDA Lista" class="logo-cabecalho">
         <h1>CDA LISTA</h1>
-        <p><strong>O Guia Comercial de Conceição do Araguaia</strong></p>
+        <p><strong>Guia Comercial de Conceição do Araguaia</strong></p>
 
         <div class="busca-wrapper">
             <div class="busca-container">
                 <span class="icone-busca">🔍</span>
-                <input type="text" id="inputBusca" placeholder="O que você procura em CDA?" onkeyup="filtrar()">
+                <input type="text" id="inputBusca" placeholder="O que você procura?" onkeyup="filtrar()">
             </div>
         </div>
     </header>
@@ -75,36 +66,35 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="btn-fechar" onclick="fecharJanelaDados()">&times;</span>
             
-            <img id="mLogo" class="modal-logo" src="" alt="Logo Empresa">
+            <img id="mLogo" class="modal-logo" src="" alt="Logo">
             
             <div class="modal-info">
                 <h2 id="mNome">Nome da Empresa</h2>
+                <hr style="margin: 10px 0; opacity: 0.2;">
                 <p><strong>📍 Endereço:</strong> <span id="mEndereco">...</span></p>
                 <p><strong>📱 WhatsApp:</strong> <span id="mZapText">...</span></p>
-                <p id="mSiteArea"><strong>🌐 Site:</strong> <span id="mSiteText">...</span></p>
                 
-                <a id="mZapLink" href="" target="_blank" class="btn-zap">Falar no Zap</a>
-                <a id="mSiteLink" href="" target="_blank" class="btn-site-modal">Acessar Site</a>
+                <div id="mSiteArea" style="display: none; margin-top: 10px;">
+                    <p><strong>🌐 Site:</strong> <span id="mSiteText">...</span></p>
+                </div>
+                
+                <div class="modal-botoes" style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px;">
+                    <a id="mZapLink" href="" target="_blank" class="btn-zap" style="text-decoration: none; text-align: center;">Falar no WhatsApp</a>
+                    <a id="mSiteLink" href="" target="_blank" class="btn-site" style="text-decoration: none; text-align: center; background: #004a8d; color: white; padding: 12px; border-radius: 8px; display: none;">Acessar Site</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <a href="https://wa.me/5562996466033" class="btn-zap-flutuante" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    <a href="https://wa.me/5562996466033" class="btn-zap-flutuante" target="_blank" style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" style="width: 60px;">
     </a>
 
     <footer>
-        <div class="container footer-content">
-            <p class="footer-row-pc">
-                <strong class="footer-brand">CDA LISTA Conectando o comércio local</strong> 
-            </p>
-            <p class="footer-info-text">
-                Conceição do Araguaia - PA (62) 99646-6033<br> 
-                © 2026 Todos os direitos reservados
-            </p>
-            
-            <hr class="footer-divider">            
-            <p class="footer-dev">Desenvolvido por <a href="https://razgo.com.br" target="_blank">RAZGO</a></p>
+        <div class="container footer-content" style="text-align: center; padding: 30px 0; background: #fff; border-top: 1px solid #eee;">
+            <p><strong>CDA LISTA</strong> - Conectando o comércio local</p>
+            <p style="font-size: 0.8rem; opacity: 0.7;">© 2026 Todos os direitos reservados</p>
+            <p style="margin-top: 10px;">Desenvolvido por <a href="https://razgo.com.br" target="_blank" style="color: #1e40af; text-decoration: none; font-weight: bold;">RAZGO</a></p>
         </div>
     </footer>
 

@@ -1,178 +1,61 @@
-/* PROJETO: CDA LISTA 
-   DESENVOLVEDOR: Márcio Oliveira (RAZGO)
-   ESTILO: Grid 4 Colunas, Logos Controladas e Modal Padrão
-*/
+/* --- CONFIGURAÇÕES GERAIS --- */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+body { background: #f4f4f4; overflow-x: hidden; }
 
-/* --- 1. CONFIGURAÇÕES GERAIS --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Arial, sans-serif;
+/* --- CABEÇALHO --- */
+header { background: #fff; text-align: center; padding: 20px; border-bottom: 1px solid #ddd; }
+.logo-cabecalho { 
+    width: 120px !important; /* TAMANHO FIXO DA LOGO */
+    height: auto; 
+    margin-bottom: 10px; 
 }
 
-body {
-    background-color: #f5f7fa;
-    color: #333;
-    line-height: 1.5;
-}
-
-/* --- 2. CABEÇALHO (LOGO CONTROLADA) --- */
-header {
-    background: #ffffff;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.logo-cabecalho {
-    max-width: 150px; /* IMPEDE A LOGO DE FICAR GIGANTE */
-    height: auto;
-    display: block;
-    margin: 0 auto 10px;
-}
-
-header h1 {
-    font-size: 1.6rem;
-    color: #1e40af;
-    margin-bottom: 10px;
-}
-
-/* --- 3. BUSCA --- */
+/* --- BUSCA --- */
 .busca-container {
-    background: #f0f2f5;
-    padding: 10px 20px;
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    max-width: 500px;
-    margin: 0 auto;
+    background: #eee; padding: 10px; border-radius: 25px;
+    max-width: 500px; margin: 15px auto; display: flex; align-items: center;
 }
+#inputBusca { border: none; background: transparent; width: 100%; outline: none; padding-left: 10px; }
 
-#inputBusca {
-    border: none;
-    background: transparent;
-    outline: none;
-    width: 100%;
-    margin-left: 10px;
-    font-size: 1rem;
-}
-
-/* --- 4. GRID DE 4 COLUNAS (O CORAÇÃO DO SITE) --- */
+/* --- GRID DE 4 COLUNAS --- */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* FORÇA 4 EMPRESAS POR LINHA */
+    grid-template-columns: repeat(4, 1fr); /* 4 POR LINHA */
     gap: 20px;
-    padding: 30px 5%;
-    max-width: 1250px;
+    padding: 20px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
-/* --- 5. CARDS DAS EMPRESAS --- */
-.card-empresa {
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
-    cursor: pointer;
-    border: 1px solid #eee;
-}
+/* --- CARDS --- */
+.card-empresa { background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.1); cursor: pointer; }
+.card-img-container img { width: 100%; height: 150px; object-fit: cover; }
+.card-info { padding: 10px; text-align: center; }
 
-.card-empresa:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-}
-
-.card-img-container img {
-    width: 100%;
-    height: 150px;
-    object-fit: cover; /* Mantém a imagem centralizada e sem distorção */
-}
-
-.card-info {
-    padding: 15px;
-    text-align: center;
-}
-
-.card-info h3 {
-    font-size: 1rem;
-    color: #1e40af;
-    margin-bottom: 5px;
-}
-
-.categoria-label {
-    font-size: 0.7rem;
-    background: #eff6ff;
-    color: #1e40af;
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-/* --- 6. MODAL (JANELA DE DADOS) --- */
-.modal-overlay {
-    display: none; /* Controlado pelo JS */
+/* --- BOTÃO WHATSAPP FLUTUANTE (CORREÇÃO DA IMAGEM GIGANTE) --- */
+.btn-zap-flutuante {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
+    bottom: 20px;
+    right: 20px;
+    width: 60px; /* TRAVA O TAMANHO DO BOTÃO */
+    height: 60px;
+    z-index: 9999;
+}
+.btn-zap-flutuante img {
+    width: 100%; /* A imagem preenche apenas os 60px do link */
+    height: 100%;
 }
 
-.modal-content {
-    background: #fff;
-    padding: 25px;
-    border-radius: 15px;
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-    position: relative;
+/* --- POPUP DE ANÚNCIO (CORREÇÃO) --- */
+.modal-overlay { 
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0,0,0,0.8); z-index: 10000; justify-content: center; align-items: center; 
+}
+.modal-content { 
+    background: white; padding: 20px; border-radius: 10px; 
+    width: 90%; max-width: 400px; text-align: center; position: relative;
 }
 
-.modal-logo {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    margin-bottom: 15px;
-    border-radius: 8px;
-}
-
-.btn-zap {
-    display: block;
-    background: #25d366;
-    color: #fff;
-    padding: 12px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    margin-top: 15px;
-}
-
-.btn-site-modal {
-    display: block;
-    background: #1e40af;
-    color: #fff;
-    padding: 12px;
-    border-radius: 8px;
-    text-decoration: none;
-    margin-top: 10px;
-}
-
-/* --- 7. RESPONSIVIDADE --- */
-
-/* Tablets */
-@media (max-width: 1024px) {
-    .grid-container { grid-template-columns: repeat(2, 1fr); }
-}
-
-/* Celulares */
-@media (max-width: 500px) {
-    .grid-container { grid-template-columns: 1fr; }
-    .logo-cabecalho { max-width: 120px; }
-}
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 1000px) { .grid-container { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 500px) { .grid-container { grid-template-columns: 1fr; } }
